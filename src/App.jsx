@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 
 // Constants
 import { ANIMATION } from './constants/animation';
@@ -6,15 +6,17 @@ import { ANIMATION } from './constants/animation';
 // Hooks
 import { useScrollProgress } from './hooks/useScrollProgress';
 
-// Components
+// Components (eager load)
 import { MorphingBackground } from './components/MorphingBackground';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Navigation } from './components/Navigation';
 import { HeroSectionWithPhoto } from './components/HeroSectionWithPhoto';
-import { ExperienceSection } from './components/ExperienceSection';
-import { Press } from './components/Press';
-import { AboutSection } from './components/AboutSection';
-import { Footer } from './components/Footer';
+
+// Components (lazy load)
+const ExperienceSection = lazy(() => import('./components/ExperienceSection').then(module => ({ default: module.ExperienceSection })));
+const Press = lazy(() => import('./components/Press').then(module => ({ default: module.Press })));
+const AboutSection = lazy(() => import('./components/AboutSection').then(module => ({ default: module.AboutSection })));
+const Footer = lazy(() => import('./components/Footer').then(module => ({ default: module.Footer })));
 
 export default function Portfolio() {
   const scrollProgress = useScrollProgress();
@@ -46,10 +48,12 @@ export default function Portfolio() {
 
         <main id="main-content" className="relative" style={{ zIndex: 10 }}>
           <HeroSectionWithPhoto />
-          <ExperienceSection />
-          <Press />
-          <AboutSection />
-          <Footer />
+          <Suspense fallback={<div className="min-h-screen" />}>
+            <ExperienceSection />
+            <Press />
+            <AboutSection />
+            <Footer />
+          </Suspense>
         </main>
       </div>
     </ErrorBoundary>
