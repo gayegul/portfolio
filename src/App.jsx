@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Github, Linkedin, ExternalLink, Mail } from 'lucide-react';
+import { Github, Linkedin, ExternalLink, Mail, X } from 'lucide-react';
 import seesawLogo from './assets/images/logos/seesawlogo.png';
-import xcloudDemoDay from './assets/images/photos/xcloud_demo_day.jpg';
+import xcloudAward from './assets/images/photos/xcloud_award.jpg';
+import wiredMagazine from './assets/images/photos/wired_magazine.png';
+import pressSocial from './assets/images/photos/press_social.png';
+import pressBrowser from './assets/images/photos/press_browser.jpg';
+import pressPhotoshoot from './assets/images/photos/press_photoshoot.jpg';
 
 // Constants
 const ANIMATION = {
@@ -651,11 +655,11 @@ function HeroSectionWithPhoto() {
           </div>
 
           <FadeIn delay={ANIMATION.HERO_DESCRIPTION_DELAY} direction="left" className="w-full lg:w-auto lg:flex-shrink-0">
-            <div className="w-full lg:w-80 aspect-[4/3] rounded-2xl overflow-hidden border-2 border-slate-800">
+            <div className="w-full lg:w-auto rounded-2xl overflow-hidden border-2 border-slate-800">
               <img
-                src={xcloudDemoDay}
-                alt="xCloud demo day with Satya Nadella"
-                className="w-full h-full object-cover"
+                src={xcloudAward}
+                alt="xCloud award recognition"
+                className="w-full lg:w-80 h-auto object-contain"
               />
             </div>
           </FadeIn>
@@ -751,6 +755,108 @@ function ExperienceSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+function Lightbox({ image, alt, isOpen, onClose }) {
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+
+    if (isOpen) {
+      window.addEventListener('keydown', handleEsc);
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/90 flex items-center justify-center p-4 backdrop-blur-sm"
+      style={{ zIndex: 9999 }}
+      onClick={onClose}
+    >
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 text-white hover:text-teal-400 transition-colors"
+        aria-label="Close"
+      >
+        <X className="w-8 h-8" />
+      </button>
+      <img
+        src={image}
+        alt={alt}
+        className="max-w-full max-h-full object-contain"
+        onClick={(e) => e.stopPropagation()}
+      />
+    </div>
+  );
+}
+
+function Press() {
+  const [lightboxImage, setLightboxImage] = useState(null);
+
+  const pressItems = [
+    { image: wiredMagazine, alt: "Wired Magazine - Xbox Cloud Gaming", position: "top", fit: "cover", url: "https://www.wired.com/story/xbox-cloud-gaming-exclusive/" },
+    { image: pressSocial, alt: "Microsoft Blog - Project xCloud", position: "center", fit: "contain", url: "https://www.techradar.com/news/prototype-xbox-controllers-for-phones-and-tablets-show-up-in-research-papers" },
+    { image: pressBrowser, alt: "xCloud press coverage", position: "center", fit: "cover" },
+    { image: pressPhotoshoot, alt: "Microsoft marketing photoshoot", position: "center 15%", fit: "cover", url: "https://blogs.microsoft.com/blog/2018/10/08/project-xcloud-gaming-with-you-at-the-center/" },
+  ];
+
+  const handleImageClick = (item) => {
+    if (item.url) {
+      window.open(item.url, '_blank', 'noopener,noreferrer');
+    } else {
+      setLightboxImage(item);
+    }
+  };
+
+  return (
+    <>
+      <section className="py-12 lg:py-16 px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          <SectionHeader>Press</SectionHeader>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {pressItems.map((item, index) => (
+              <FadeIn key={index} delay={index * 100}>
+                <div
+                  className="relative rounded-xl border-2 border-slate-800 bg-slate-900 group cursor-pointer overflow-hidden"
+                  onClick={() => handleImageClick(item)}
+                >
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    className={`w-full h-56 object-${item.fit} transition-all duration-500`}
+                    style={{ objectPosition: item.position }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                    {item.url && (
+                      <div className="absolute bottom-2 right-2">
+                        <ExternalLink className="w-5 h-5 text-white" />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Lightbox
+        image={lightboxImage?.image}
+        alt={lightboxImage?.alt}
+        isOpen={!!lightboxImage}
+        onClose={() => setLightboxImage(null)}
+      />
+    </>
   );
 }
 
@@ -920,6 +1026,7 @@ export default function Portfolio() {
       <main id="main-content" className="relative" style={{ zIndex: 10 }}>
         <HeroSectionWithPhoto />
         <ExperienceSection />
+        <Press />
         <AboutSection />
         <Footer />
       </main>
