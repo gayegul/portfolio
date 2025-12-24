@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { SectionHeader } from './SectionHeader';
 import { FadeIn } from './FadeIn';
@@ -14,12 +14,20 @@ import pressPhotoshoot from '../assets/images/photos/press_photoshoot.jpg';
 
 export function Press() {
   const [lightboxImage, setLightboxImage] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const pressItems = useMemo(() => [
-    { image: wiredMagazine, alt: "Wired Magazine - Xbox Cloud Gaming", title: "Wired", logo: wiredLogo, position: "left center", fit: "cover", url: "https://www.wired.com/story/xbox-cloud-gaming-exclusive/" },
-    { image: pressSocial, alt: "Microsoft Blog - Project xCloud", title: "TechRadar", logo: techradarLogo, position: "top", background_color: "white", fit: "contain", url: "https://www.techradar.com/news/prototype-xbox-controllers-for-phones-and-tablets-show-up-in-research-papers" },
-    { image: xcloudBooth, alt: "GeekWire - Project xCloud", title: "GeekWire", logo: geekwireLogo, position: "center", fit: "cover", url: "https://www.geekwire.com/2019/microsoft-will-bring-project-xcloud-game-streaming-service-windows-10-pcs/" },
-    { image: pressPhotoshoot, alt: "Microsoft marketing photoshoot", title: "Microsoft Blog", logo: msftLogo, position: "center 15%", fit: "cover", url: "https://blogs.microsoft.com/blog/2018/10/08/project-xcloud-gaming-with-you-at-the-center/" },
+    { image: wiredMagazine, alt: "Wired Magazine - Xbox Cloud Gaming", title: "Wired", logo: wiredLogo, position: "left center", mobilePosition: "left top", fit: "cover", url: "https://www.wired.com/story/xbox-cloud-gaming-exclusive/" },
+    { image: pressSocial, alt: "Microsoft Blog - Project xCloud", title: "TechRadar", logo: techradarLogo, position: "top", mobilePosition: "top", background_color: "white", fit: "contain", url: "https://www.techradar.com/news/prototype-xbox-controllers-for-phones-and-tablets-show-up-in-research-papers" },
+    { image: xcloudBooth, alt: "GeekWire - Project xCloud", title: "GeekWire", logo: geekwireLogo, position: "center", mobilePosition: "top", fit: "cover", url: "https://www.geekwire.com/2019/microsoft-will-bring-project-xcloud-game-streaming-service-windows-10-pcs/" },
+    { image: pressPhotoshoot, alt: "Microsoft marketing photoshoot", title: "Microsoft Blog", logo: msftLogo, position: "center 15%", mobilePosition: "top", fit: "cover", url: "https://blogs.microsoft.com/blog/2018/10/08/project-xcloud-gaming-with-you-at-the-center/" },
   ], []);
 
   const handleImageClick = useCallback((item) => {
@@ -80,8 +88,8 @@ export function Press() {
                       src={item.image}
                       alt=""
                       role="presentation"
-                      className={`w-full h-56 object-${item.fit} transition-all duration-500`}
-                      style={{ objectPosition: item.position }}
+                      className={`w-full h-40 sm:h-56 object-${item.fit} transition-all duration-500`}
+                      style={{ objectPosition: isMobile ? item.mobilePosition : item.position }}
                       loading="lazy"
                     />
                   </button>
