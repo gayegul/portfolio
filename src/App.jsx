@@ -301,7 +301,7 @@ function AnimatedHeading({ children, as: Component = 'h1', delay = 0, className 
 function SectionHeader({ children }) {
   return (
     <FadeIn>
-      <h2 className="text-xs sm:text-sm font-medium tracking-widest uppercase text-slate-500 mb-8 sm:mb-12">
+      <h2 className="text-sm sm:text-base font-semibold tracking-wider uppercase text-slate-400 mb-8 sm:mb-12">
         {children}
       </h2>
     </FadeIn>
