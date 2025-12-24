@@ -11,7 +11,7 @@ export function AboutSection() {
         <SectionHeader>About</SectionHeader>
         <div className="mb-12 sm:mb-16">
           <FadeIn>
-            <p className="text-lg sm:text-xl text-slate-300 leading-relaxed text-justify">
+            <p className="text-lg sm:text-xl text-slate-300 leading-relaxed">
               Three degrees in engineering, then a pivot to software as an apprentice at Microsoft. Now, I own things end-to-end: specs, architecture, implementation, tests, deployment. I like solving problems, building, and shipping fast.
             </p>
           </FadeIn>
