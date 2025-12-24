@@ -659,13 +659,18 @@ function HeroSectionWithPhoto() {
           </div>
 
           <FadeIn delay={ANIMATION.HERO_DESCRIPTION_DELAY} direction="left" className="w-full lg:w-auto lg:flex-shrink-0">
-            <div className="w-full lg:w-auto rounded-2xl overflow-hidden border-2 border-slate-800">
+            <a
+              href="https://www.tomsguide.com/us/best-of-e3-2019,review-6571.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full lg:w-auto rounded-2xl overflow-hidden border-2 border-slate-800 hover:border-teal-400 transition-colors"
+            >
               <img
                 src={xcloudAward}
                 alt="xCloud award recognition"
                 className="w-full lg:w-80 h-auto object-contain"
               />
-            </div>
+            </a>
           </FadeIn>
         </div>
       </div>
@@ -859,7 +864,7 @@ function Press() {
                     </div>
                   )}
                   <div
-                    className="relative rounded-xl border-2 border-slate-800 group cursor-pointer overflow-hidden"
+                    className="relative rounded-xl border-2 border-slate-800 hover:border-teal-400 group cursor-pointer overflow-hidden transition-colors"
                     style={{ backgroundColor: item.background_color || '#0f172a' }}
                     onClick={() => handleImageClick(item)}
                   >
