@@ -9,9 +9,9 @@ export function AboutSection() {
     <section id="about" className="py-8 sm:py-12 px-4 sm:px-6" aria-label="About and education" style={{ scrollMarginTop: '5rem' }}>
       <div className="max-w-5xl mx-auto">
         <SectionHeader>About</SectionHeader>
-        <div className="max-w-2xl mb-12 sm:mb-16">
+        <div className="mb-12 sm:mb-16">
           <FadeIn>
-            <p className="text-lg sm:text-xl text-slate-300 leading-relaxed">
+            <p className="text-lg sm:text-xl text-slate-300 leading-relaxed text-justify">
               Three degrees in engineering, then a pivot to software as an apprentice at Microsoft. Now, I own things end-to-end: specs, architecture, implementation, tests, deployment. I like solving problems, building, and shipping fast.
             </p>
           </FadeIn>

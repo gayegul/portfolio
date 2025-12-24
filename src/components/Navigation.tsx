@@ -25,6 +25,12 @@ export function Navigation({ isVisible }) {
     }
   }, []);
 
+  const scrollToTop = useCallback((e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.history.pushState('', document.title, window.location.pathname + window.location.search);
+  }, []);
+
   return (
     <nav
       className="fixed top-0 left-0 right-0 transition-all duration-300"
@@ -47,6 +53,7 @@ export function Navigation({ isVisible }) {
         <div className="max-w-5xl mx-auto py-4 flex items-center justify-between">
           <a
             href="#"
+            onClick={scrollToTop}
             className="text-base font-semibold text-slate-100 hover:text-teal-400 transition-colors"
           >
             {personalInfo.name}
