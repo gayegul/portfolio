@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Github, Linkedin, ExternalLink, Mail } from 'lucide-react';
+import seesawLogo from './assets/images/logos/seesawlogo.png';
+import xcloudDemoDay from './assets/images/photos/xcloud_demo_day.jpg';
 
 // Constants
 const ANIMATION = {
@@ -343,9 +345,7 @@ function CompanyLogo({ company }) {
   }
 
   return (
-    <div className="w-6 h-6 rounded flex items-center justify-center" style={{ backgroundColor: '#7c3aed' }}>
-      <span className="text-white text-xs font-bold">S</span>
-    </div>
+    <img src={seesawLogo} alt="Seesaw" className="w-6 h-6 object-contain" />
   );
 }
 
@@ -629,30 +629,34 @@ function Navigation({ isVisible }) {
 // Layout Option A: Hero with side photo
 function HeroSectionWithPhoto() {
   return (
-    <header className="min-h-[60vh] flex items-center pt-20 px-6">
+    <header className="min-h-[30vh] lg:min-h-[60vh] flex items-center pt-16 sm:pt-20 px-4 sm:px-6 pb-4 lg:pb-0">
       <div className="max-w-5xl mx-auto w-full">
-        <div className="flex items-center gap-12">
-          <div className="flex-1">
-            <h1 className="text-6xl md:text-8xl font-bold tracking-tight text-slate-100 mb-4">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-12">
+          <div className="flex-1 w-full">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tight text-slate-100 mb-3 sm:mb-4">
               {personalInfo.name}
             </h1>
 
             <FadeIn delay={ANIMATION.HERO_SUBTITLE_DELAY}>
-              <p className="text-2xl md:text-3xl text-slate-400 max-w-2xl leading-relaxed mb-6">
+              <p className="text-xl sm:text-2xl md:text-3xl text-slate-400 max-w-2xl leading-relaxed mb-4 sm:mb-6">
                 {personalInfo.title}
               </p>
             </FadeIn>
 
             <FadeIn delay={ANIMATION.HERO_DESCRIPTION_DELAY}>
-              <p className="text-lg text-slate-500 max-w-xl leading-relaxed">
-                Currently at Seesaw, building for 1 in 3 US elementary schools. Previously founding engineer on Xbox Cloud Gaming.
+              <p className="text-base sm:text-lg text-slate-500 max-w-xl leading-relaxed">
+                Founding engineer on Xbox Cloud Gaming. Built and presented the prototype to Satya Nadella that secured project funding. Now at Seesaw, building for 25M+ students across 1 in 3 US elementary schools.
               </p>
             </FadeIn>
           </div>
-          
-          <FadeIn delay={ANIMATION.HERO_DESCRIPTION_DELAY} direction="left" className="hidden lg:block">
-            <div className="w-64 h-64 rounded-2xl overflow-hidden border-2 border-slate-800">
-              <PhotoPlaceholder photo={photos.e3Award} showCaption={false} aspectRatio="aspect-square" />
+
+          <FadeIn delay={ANIMATION.HERO_DESCRIPTION_DELAY} direction="left" className="w-full lg:w-auto lg:flex-shrink-0">
+            <div className="w-full lg:w-80 aspect-[4/3] rounded-2xl overflow-hidden border-2 border-slate-800">
+              <img
+                src={xcloudDemoDay}
+                alt="xCloud demo day with Satya Nadella"
+                className="w-full h-full object-cover"
+              />
             </div>
           </FadeIn>
         </div>
@@ -678,7 +682,7 @@ function HeroSection() {
 
         <FadeIn delay={ANIMATION.HERO_DESCRIPTION_DELAY}>
           <p className="text-base sm:text-lg text-slate-500 max-w-xl leading-relaxed">
-            Currently at Seesaw, building for 1 in 3 US elementary schools. Previously founding engineer on Xbox Cloud Gaming.
+            Founding engineer on Xbox Cloud Gaming. Built and presented the prototype to Satya Nadella that secured project funding. Now at Seesaw, building for 25M+ students across 1 in 3 US elementary schools.
           </p>
         </FadeIn>
       </div>
@@ -914,7 +918,7 @@ export default function Portfolio() {
       <MorphingBackground scrollProgress={scrollProgress} />
 
       <main id="main-content" className="relative" style={{ zIndex: 10 }}>
-        <HeroSection />
+        <HeroSectionWithPhoto />
         <ExperienceSection />
         <AboutSection />
         <Footer />
