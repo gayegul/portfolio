@@ -3,8 +3,12 @@ import { Github, Linkedin, ExternalLink, Mail, X } from 'lucide-react';
 import seesawLogo from './assets/images/logos/seesawlogo.png';
 import xcloudAward from './assets/images/photos/xcloud_award.jpg';
 import wiredMagazine from './assets/images/photos/wired_magazine.png';
+import wiredLogo from './assets/images/photos/wired_logo.png';
+import msftLogo from './assets/images/photos/msft_logo.png';
+import techradarLogo from './assets/images/photos/techradar_logo.png';
+import geekwireLogo from './assets/images/photos/geekwire.png';
 import pressSocial from './assets/images/photos/press_social.png';
-import pressBrowser from './assets/images/photos/press_browser.jpg';
+import xcloudBooth from './assets/images/photos/xcloud_booth.jpeg';
 import pressPhotoshoot from './assets/images/photos/press_photoshoot.jpg';
 
 // Constants
@@ -804,17 +808,20 @@ function Press() {
   const [lightboxImage, setLightboxImage] = useState(null);
 
   const pressItems = [
-    { image: wiredMagazine, alt: "Wired Magazine - Xbox Cloud Gaming", position: "top", fit: "cover", url: "https://www.wired.com/story/xbox-cloud-gaming-exclusive/" },
-    { image: pressSocial, alt: "Microsoft Blog - Project xCloud", position: "center", fit: "contain", url: "https://www.techradar.com/news/prototype-xbox-controllers-for-phones-and-tablets-show-up-in-research-papers" },
-    { image: pressBrowser, alt: "xCloud press coverage", position: "center", fit: "cover" },
-    { image: pressPhotoshoot, alt: "Microsoft marketing photoshoot", position: "center 15%", fit: "cover", url: "https://blogs.microsoft.com/blog/2018/10/08/project-xcloud-gaming-with-you-at-the-center/" },
+    { image: wiredMagazine, alt: "Wired Magazine - Xbox Cloud Gaming", title: "Wired", logo: wiredLogo, position: "left center", fit: "cover", url: "https://www.wired.com/story/xbox-cloud-gaming-exclusive/" },
+    { image: pressSocial, alt: "Microsoft Blog - Project xCloud", title: "TechRadar", logo: techradarLogo, position: "top", background_color: "white", fit: "contain", url: "https://www.techradar.com/news/prototype-xbox-controllers-for-phones-and-tablets-show-up-in-research-papers" },
+    { image: xcloudBooth, alt: "GeekWire - Project xCloud", title: "GeekWire", logo: geekwireLogo, position: "center", fit: "cover", url: "https://www.geekwire.com/2019/microsoft-will-bring-project-xcloud-game-streaming-service-windows-10-pcs/" },
+    { image: pressPhotoshoot, alt: "Microsoft marketing photoshoot", title: "Microsoft Blog", logo: msftLogo, position: "center 15%", fit: "cover", url: "https://blogs.microsoft.com/blog/2018/10/08/project-xcloud-gaming-with-you-at-the-center/" },
   ];
 
   const handleImageClick = (item) => {
-    if (item.url) {
-      window.open(item.url, '_blank', 'noopener,noreferrer');
-    } else {
-      setLightboxImage(item);
+    setLightboxImage(item);
+  };
+
+  const handleTitleClick = (url, e) => {
+    e.stopPropagation();
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
     }
   };
 
@@ -826,22 +833,42 @@ function Press() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {pressItems.map((item, index) => (
               <FadeIn key={index} delay={index * 100}>
-                <div
-                  className="relative rounded-xl border-2 border-slate-800 bg-slate-900 group cursor-pointer overflow-hidden"
-                  onClick={() => handleImageClick(item)}
-                >
-                  <img
-                    src={item.image}
-                    alt={item.alt}
-                    className={`w-full h-56 object-${item.fit} transition-all duration-500`}
-                    style={{ objectPosition: item.position }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                    {item.url && (
-                      <div className="absolute bottom-2 right-2">
-                        <ExternalLink className="w-5 h-5 text-white" />
-                      </div>
-                    )}
+                <div className="flex flex-col gap-2">
+                  {item.url ? (
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-medium text-slate-400 hover:text-teal-400 transition-colors flex items-center gap-1"
+                      onClick={(e) => handleTitleClick(item.url, e)}
+                    >
+                      {item.logo ? (
+                        <img src={item.logo} alt={item.title} className="h-4 object-contain" />
+                      ) : (
+                        item.title
+                      )}
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  ) : (
+                    <div className="text-xs font-medium text-slate-400">
+                      {item.logo ? (
+                        <img src={item.logo} alt={item.title} className="h-4 object-contain" />
+                      ) : (
+                        item.title
+                      )}
+                    </div>
+                  )}
+                  <div
+                    className="relative rounded-xl border-2 border-slate-800 group cursor-pointer overflow-hidden"
+                    style={{ backgroundColor: item.background_color || '#0f172a' }}
+                    onClick={() => handleImageClick(item)}
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.alt}
+                      className={`w-full h-56 object-${item.fit} transition-all duration-500`}
+                      style={{ objectPosition: item.position }}
+                    />
                   </div>
                 </div>
               </FadeIn>
