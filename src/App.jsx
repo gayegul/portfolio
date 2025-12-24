@@ -633,13 +633,9 @@ function HeroSectionWithPhoto() {
       <div className="max-w-5xl mx-auto w-full">
         <div className="flex items-center gap-12">
           <div className="flex-1">
-            <AnimatedHeading
-              as="h1"
-              delay={ANIMATION.HERO_TITLE_DELAY}
-              className="text-6xl md:text-8xl font-bold tracking-tight text-slate-100 mb-4"
-            >
+            <h1 className="text-6xl md:text-8xl font-bold tracking-tight text-slate-100 mb-4">
               {personalInfo.name}
-            </AnimatedHeading>
+            </h1>
 
             <FadeIn delay={ANIMATION.HERO_SUBTITLE_DELAY}>
               <p className="text-2xl md:text-3xl text-slate-400 max-w-2xl leading-relaxed mb-6">
@@ -668,15 +664,11 @@ function HeroSectionWithPhoto() {
 // Layout Option B: Standard hero (no photo)
 function HeroSection() {
   return (
-    <header className="min-h-[50vh] sm:min-h-[60vh] flex items-center pt-16 sm:pt-20 px-4 sm:px-6">
+    <header className="min-h-[30vh] lg:min-h-[60vh] flex items-center pt-16 sm:pt-20 px-4 sm:px-6 pb-4 lg:pb-0">
       <div className="max-w-5xl mx-auto w-full">
-        <AnimatedHeading
-          as="h1"
-          delay={ANIMATION.HERO_TITLE_DELAY}
-          className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tight text-slate-100 mb-3 sm:mb-4"
-        >
+        <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tight text-slate-100 mb-3 sm:mb-4">
           {personalInfo.name}
-        </AnimatedHeading>
+        </h1>
 
         <FadeIn delay={ANIMATION.HERO_SUBTITLE_DELAY}>
           <p className="text-xl sm:text-2xl md:text-3xl text-slate-400 max-w-2xl leading-relaxed mb-4 sm:mb-6">
@@ -745,7 +737,7 @@ function FullWidthDivider() {
 
 function ExperienceSection() {
   return (
-    <section id="work" className="py-12 sm:py-16 px-4 sm:px-6" style={{ scrollMarginTop: '5rem' }}>
+    <section id="work" className="py-4 lg:py-16 px-4 sm:px-6" style={{ scrollMarginTop: '5rem' }}>
       <div className="max-w-5xl mx-auto">
         <SectionHeader>Work</SectionHeader>
         <div className="grid gap-4 sm:gap-6">
