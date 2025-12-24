@@ -1,8 +1,11 @@
 import React, { useCallback } from 'react';
-import PropTypes from 'prop-types';
 import { BLOB_CONFIG, SPARKLE_COUNT } from '../constants/animation';
 
-export function MorphingBackground({ scrollProgress }) {
+interface MorphingBackgroundProps {
+  scrollProgress: number;
+}
+
+export function MorphingBackground({ scrollProgress }: MorphingBackgroundProps) {
   const getBlobRadius = useCallback((seed, progress) => {
     const t = (progress * seed) % 1;
     const a = 40 + Math.sin(t * Math.PI * 2) * 15;
@@ -63,7 +66,3 @@ export function MorphingBackground({ scrollProgress }) {
     </div>
   );
 }
-
-MorphingBackground.propTypes = {
-  scrollProgress: PropTypes.number.isRequired,
-};

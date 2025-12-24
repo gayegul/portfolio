@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import PropTypes from 'prop-types';
 import { Github, Linkedin, Mail } from 'lucide-react';
 import { personalInfo } from '../data/personalInfo';
 
-export function Navigation({ isVisible }) {
+interface NavigationProps {
+  isVisible: boolean;
+}
+
+export function Navigation({ isVisible }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [emailCopied, setEmailCopied] = useState(false);
@@ -195,7 +198,3 @@ export function Navigation({ isVisible }) {
     </nav>
   );
 }
-
-Navigation.propTypes = {
-  isVisible: PropTypes.bool.isRequired,
-};

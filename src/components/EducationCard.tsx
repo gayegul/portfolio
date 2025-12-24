@@ -1,9 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { ExternalLink } from 'lucide-react';
 import { FadeIn } from './FadeIn';
+import { Education } from '../data/education';
 
-export function EducationCard({ edu, index }) {
+interface EducationCardProps {
+  edu: Education;
+  index: number;
+}
+
+export function EducationCard({ edu, index }: EducationCardProps) {
   return (
     <FadeIn delay={index * 100}>
       <a
@@ -45,15 +50,3 @@ export function EducationCard({ edu, index }) {
     </FadeIn>
   );
 }
-
-EducationCard.propTypes = {
-  edu: PropTypes.shape({
-    degree: PropTypes.string.isRequired,
-    field: PropTypes.string.isRequired,
-    school: PropTypes.string.isRequired,
-    country: PropTypes.string.isRequired,
-    flag: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-  }).isRequired,
-  index: PropTypes.number.isRequired,
-};
