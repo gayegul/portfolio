@@ -12,8 +12,20 @@ import pressSocial from '../assets/images/photos/press_social.png';
 import xcloudBooth from '../assets/images/photos/xcloud_booth.jpeg';
 import pressPhotoshoot from '../assets/images/photos/press_photoshoot.jpg';
 
+interface PressItem {
+  image: string;
+  alt: string;
+  title: string;
+  logo: string;
+  position: string;
+  mobilePosition: string;
+  fit: string;
+  url: string;
+  background_color?: string;
+}
+
 export function Press() {
-  const [lightboxImage, setLightboxImage] = useState(null);
+  const [lightboxImage, setLightboxImage] = useState<PressItem | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -30,11 +42,11 @@ export function Press() {
     { image: pressPhotoshoot, alt: "Microsoft marketing photoshoot", title: "Microsoft Blog", logo: msftLogo, position: "center 15%", mobilePosition: "top", fit: "cover", url: "https://blogs.microsoft.com/blog/2018/10/08/project-xcloud-gaming-with-you-at-the-center/" },
   ], []);
 
-  const handleImageClick = useCallback((item) => {
+  const handleImageClick = useCallback((item: PressItem) => {
     setLightboxImage(item);
   }, []);
 
-  const handleTitleClick = useCallback((url, e) => {
+  const handleTitleClick = useCallback((url: string, e: React.MouseEvent<HTMLAnchorElement>) => {
     e.stopPropagation();
     if (url) {
       window.open(url, '_blank', 'noopener,noreferrer');

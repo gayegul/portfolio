@@ -6,7 +6,7 @@ interface MorphingBackgroundProps {
 }
 
 export function MorphingBackground({ scrollProgress }: MorphingBackgroundProps) {
-  const getBlobRadius = useCallback((seed, progress) => {
+  const getBlobRadius = useCallback((seed: number, progress: number): string => {
     const t = (progress * seed) % 1;
     const a = 40 + Math.sin(t * Math.PI * 2) * 15;
     const b = 60 - Math.cos(t * Math.PI * 2) * 20;

@@ -10,7 +10,7 @@ interface LightboxProps {
 
 export function Lightbox({ image, alt, isOpen, onClose }: LightboxProps) {
   useEffect(() => {
-    const handleEsc = (e) => {
+    const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
 
@@ -46,7 +46,7 @@ export function Lightbox({ image, alt, isOpen, onClose }: LightboxProps) {
         src={image}
         alt={alt}
         className="max-w-full max-h-full object-contain"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e: React.MouseEvent) => e.stopPropagation()}
       />
     </div>
   );
