@@ -1,9 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { ANIMATION } from '../constants/animation';
 
-export function FadeIn({ children, delay = 0, direction = 'up', className = '' }) {
+interface FadeInProps {
+  children: React.ReactNode;
+  delay?: number;
+  direction?: 'up' | 'down' | 'left' | 'right';
+  className?: string;
+}
+
+export function FadeIn({ children, delay = 0, direction = 'up', className = '' }: FadeInProps) {
   const [ref, isVisible] = useIntersectionObserver();
 
   const transforms = {
@@ -28,10 +34,3 @@ export function FadeIn({ children, delay = 0, direction = 'up', className = '' }
     </div>
   );
 }
-
-FadeIn.propTypes = {
-  children: PropTypes.node.isRequired,
-  delay: PropTypes.number,
-  direction: PropTypes.oneOf(['up', 'down', 'left', 'right']),
-  className: PropTypes.string,
-};

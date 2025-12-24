@@ -1,8 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FadeIn } from './FadeIn';
 
-export function SectionHeader({ children }) {
+interface SectionHeaderProps {
+  children: React.ReactNode;
+}
+
+export function SectionHeader({ children }: SectionHeaderProps) {
   return (
     <FadeIn>
       <h2 className="text-sm sm:text-base font-semibold tracking-wider uppercase text-slate-400 mb-8 sm:mb-12">
@@ -12,6 +15,3 @@ export function SectionHeader({ children }) {
   );
 }
 
-SectionHeader.propTypes = {
-  children: PropTypes.node.isRequired,
-};

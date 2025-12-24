@@ -1,4 +1,14 @@
-export const education = [
+export interface Education {
+  degree: string;
+  field: string;
+  school: string;
+  schoolFull: string;
+  country: string;
+  flag: string;
+  url: string;
+}
+
+export const education: Education[] = [
   {
     degree: "Master's",
     field: 'Engineering Management',

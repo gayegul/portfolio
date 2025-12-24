@@ -1,4 +1,12 @@
-export const personalInfo = {
+export interface PersonalInfo {
+  name: string;
+  title: string;
+  email: string;
+  github: string;
+  linkedin: string;
+}
+
+export const personalInfo: PersonalInfo = {
   name: 'Gaye Bulut',
   title: 'Senior Software Engineer',
   email: 'gayegul@gmail.com',

@@ -5,14 +5,23 @@ export const ANIMATION = {
   FADE_DURATION: 700,
   TRANSITION_DURATION: 300,
   NAV_SCROLL_THRESHOLD: 100,
-};
+} as const;
 
 export const INTERSECTION = {
   THRESHOLD: 0.1,
   ROOT_MARGIN: '0px 0px -50px 0px',
-};
+} as const;
 
-export const BLOB_CONFIG = [
+interface BlobConfig {
+  size: number;
+  basePosition: { x: number; y: number };
+  drift: { x: number; y: number };
+  color: string;
+  speed: number;
+  rotation: number;
+}
+
+export const BLOB_CONFIG: BlobConfig[] = [
   { size: 280, basePosition: { x: 75, y: 25 }, drift: { x: -20, y: 40 }, color: 'rgba(20, 184, 166, 0.12)', speed: 1, rotation: 360 },
   { size: 180, basePosition: { x: 20, y: 60 }, drift: { x: 30, y: -20 }, color: 'rgba(6, 182, 212, 0.1)', speed: 0.7, rotation: -180 },
   { size: 120, basePosition: { x: 85, y: 70 }, drift: { x: -40, y: 20 }, color: 'rgba(20, 184, 166, 0.15)', speed: 1.3, rotation: 270 },
@@ -27,4 +36,4 @@ export const LAYOUT = {
   PRESS_IMAGE_HEIGHT: 'h-56',
   HERO_IMAGE_MAX_WIDTH_MOBILE: 'max-w-[220px]',
   HERO_IMAGE_MAX_WIDTH_DESKTOP: 'lg:max-w-[280px]',
-};
+} as const;

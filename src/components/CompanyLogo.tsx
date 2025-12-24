@@ -1,8 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import seesawLogo from '../assets/images/logos/seesawlogo.png';
 
-export function CompanyLogo({ company }) {
+interface CompanyLogoProps {
+  company: string;
+}
+
+export function CompanyLogo({ company }: CompanyLogoProps) {
   if (company === 'Microsoft') {
     return (
       <svg className="w-6 h-6" viewBox="0 0 23 23" fill="none">
@@ -19,6 +22,3 @@ export function CompanyLogo({ company }) {
   );
 }
 
-CompanyLogo.propTypes = {
-  company: PropTypes.string.isRequired,
-};

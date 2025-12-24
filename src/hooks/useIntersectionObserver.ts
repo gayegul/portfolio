@@ -1,11 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, RefObject } from 'react';
 import { INTERSECTION } from '../constants/animation';
 
 export function useIntersectionObserver(
-  threshold = INTERSECTION.THRESHOLD,
-  rootMargin = INTERSECTION.ROOT_MARGIN
-) {
-  const ref = useRef(null);
+  threshold: number = INTERSECTION.THRESHOLD,
+  rootMargin: string = INTERSECTION.ROOT_MARGIN
+): [RefObject<HTMLDivElement>, boolean] {
+  const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
