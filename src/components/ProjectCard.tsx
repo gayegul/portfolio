@@ -14,24 +14,9 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
     <FadeIn delay={index * ANIMATION.STAGGER_DELAY}>
       <article
         tabIndex={0}
-        className="relative p-5 sm:p-8 rounded-xl sm:rounded-2xl border transition-all duration-500 hover:-translate-y-1 focus:outline-none group"
-        style={{
-          backgroundColor: 'rgba(15, 23, 42, 0.5)',
-          borderColor: 'rgb(30, 41, 59)',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = 'rgba(20, 184, 166, 0.3)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = 'rgb(30, 41, 59)';
-        }}
+        className="relative p-5 sm:p-8 rounded-xl sm:rounded-2xl border border-slate-border bg-slate-card transition-all duration-500 hover:-translate-y-1 hover:border-teal-400/30 focus:outline-none group"
       >
-        <div
-          className="absolute top-0 left-5 right-5 sm:left-8 sm:right-8 h-px opacity-0 group-hover:opacity-100 transition-opacity"
-          style={{
-            background: 'linear-gradient(to right, transparent, rgba(20, 184, 166, 0.5), transparent)',
-          }}
-        />
+        <div className="absolute top-0 left-5 right-5 sm:left-8 sm:right-8 h-px bg-gradient-to-r from-transparent via-teal-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-4 mb-3 sm:mb-4">
           <h3 className="text-xl sm:text-2xl font-semibold text-slate-100 group-hover:text-teal-400 transition-colors">
@@ -47,7 +32,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               <span>{project.company}</span>
               <CompanyLogo company={project.company} />
             </a>
-            <span className="text-sm text-slate-600" style={{ fontVariantNumeric: 'tabular-nums' }}>
+            <span className="text-sm text-slate-600 tabular-nums">
               {project.period}
             </span>
           </div>

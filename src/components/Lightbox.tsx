@@ -29,8 +29,7 @@ export function Lightbox({ image, alt, isOpen, onClose }: LightboxProps) {
 
   return (
     <div
-      className="fixed inset-0 bg-black/90 flex items-center justify-center p-4 backdrop-blur-sm"
-      style={{ zIndex: 9999 }}
+      className="fixed inset-0 bg-black/90 flex items-center justify-center p-4 backdrop-blur-sm z-[9999]"
       onClick={onClose}
       role="dialog"
       aria-modal="true"

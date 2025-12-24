@@ -6,7 +6,7 @@ import { education } from '../data/education';
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-8 sm:py-12 px-4 sm:px-6" aria-label="About and education" style={{ scrollMarginTop: '5rem' }}>
+    <section id="about" className="py-8 sm:py-12 px-4 sm:px-6 scroll-mt-nav" aria-label="About and education">
       <div className="max-w-5xl mx-auto">
         <SectionHeader>About</SectionHeader>
         <div className="mb-12 sm:mb-16">
@@ -18,7 +18,7 @@ export function AboutSection() {
         </div>
 
         {/* Education Section */}
-        <div id="education" style={{ scrollMarginTop: '5rem' }}>
+        <div id="education" className="scroll-mt-nav">
           <SectionHeader>Education</SectionHeader>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {education.map((edu, index) => (

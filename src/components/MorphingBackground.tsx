@@ -16,7 +16,7 @@ export function MorphingBackground({ scrollProgress }: MorphingBackgroundProps) 
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
       {BLOB_CONFIG.map((blob, index) => {
         const x = blob.basePosition.x + blob.drift.x * scrollProgress;
         const y = blob.basePosition.y + blob.drift.y * scrollProgress;

@@ -28,10 +28,7 @@ export class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div
-          className="min-h-screen flex items-center justify-center px-4"
-          style={{ backgroundColor: '#020617' }}
-        >
+        <div className="min-h-screen flex items-center justify-center px-4 bg-navy-dark">
           <div className="max-w-md text-center">
             <h1 className="text-4xl font-bold text-slate-100 mb-4">
               Oops!

@@ -32,10 +32,7 @@ export function HeroSectionWithPhoto() {
               href="https://www.tomsguide.com/us/best-of-e3-2019,review-6571.html"
               target="_blank"
               rel="noopener noreferrer"
-              className="block max-w-[220px] mx-auto lg:mx-0 lg:max-w-[280px] rounded-2xl overflow-hidden border-2 border-slate-800 hover:border-teal-400 transition-all"
-              style={{
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(20, 184, 166, 0.1)'
-              }}
+              className="block max-w-[220px] mx-auto lg:mx-0 lg:max-w-[280px] rounded-2xl overflow-hidden border-2 border-slate-800 hover:border-teal-400 transition-all shadow-photo"
             >
               <img
                 src={xcloudAward}

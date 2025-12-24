@@ -45,14 +45,7 @@ export function Navigation({ isVisible }: NavigationProps) {
         pointerEvents: isVisible ? 'auto' : 'none',
       }}
     >
-      <div
-        className="border-b px-4 sm:px-6"
-        style={{
-          backdropFilter: 'blur(12px)',
-          backgroundColor: 'rgba(2, 6, 23, 0.8)',
-          borderColor: 'rgba(30, 41, 59, 0.5)',
-        }}
-      >
+      <div className="border-b border-nav-border bg-nav-bg backdrop-blur-xl px-4 sm:px-6">
         <div className="max-w-5xl mx-auto py-4 flex items-center justify-between">
           <a
             href="#"

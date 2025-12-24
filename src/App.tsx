@@ -33,11 +33,10 @@ export default function Portfolio() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen text-slate-100" style={{ backgroundColor: '#020617' }}>
+      <div className="min-h-screen text-slate-100 bg-navy-dark">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-teal-500 focus:text-slate-950 focus:rounded-lg"
-          style={{ zIndex: 50 }}
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-teal-500 focus:text-slate-950 focus:rounded-lg z-50"
         >
           Skip to main content
         </a>
@@ -46,7 +45,7 @@ export default function Portfolio() {
 
         <MorphingBackground scrollProgress={scrollProgress} />
 
-        <main id="main-content" className="relative" style={{ zIndex: 10 }}>
+        <main id="main-content" className="relative z-10">
           <HeroSectionWithPhoto />
           <Suspense fallback={<div className="min-h-screen" />}>
             <ExperienceSection />
