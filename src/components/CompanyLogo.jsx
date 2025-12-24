@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import seesawLogo from '../assets/images/logos/seesawlogo.png';
 
 export function CompanyLogo({ company }) {
@@ -17,3 +18,7 @@ export function CompanyLogo({ company }) {
     <img src={seesawLogo} alt="Seesaw" className="w-6 h-6 object-contain" loading="lazy" />
   );
 }
+
+CompanyLogo.propTypes = {
+  company: PropTypes.string.isRequired,
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FadeIn } from './FadeIn';
 
 export function SectionHeader({ children }) {
@@ -10,3 +11,7 @@ export function SectionHeader({ children }) {
     </FadeIn>
   );
 }
+
+SectionHeader.propTypes = {
+  children: PropTypes.node.isRequired,
+};

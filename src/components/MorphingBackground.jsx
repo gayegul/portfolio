@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { BLOB_CONFIG, SPARKLE_COUNT } from '../constants/animation';
 
 export function MorphingBackground({ scrollProgress }) {
@@ -62,3 +63,7 @@ export function MorphingBackground({ scrollProgress }) {
     </div>
   );
 }
+
+MorphingBackground.propTypes = {
+  scrollProgress: PropTypes.number.isRequired,
+};

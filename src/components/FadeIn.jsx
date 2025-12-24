@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { ANIMATION } from '../constants/animation';
 
@@ -27,3 +28,10 @@ export function FadeIn({ children, delay = 0, direction = 'up', className = '' }
     </div>
   );
 }
+
+FadeIn.propTypes = {
+  children: PropTypes.node.isRequired,
+  delay: PropTypes.number,
+  direction: PropTypes.oneOf(['up', 'down', 'left', 'right']),
+  className: PropTypes.string,
+};

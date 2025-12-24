@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { X } from 'lucide-react';
 
 export function Lightbox({ image, alt, isOpen, onClose }) {
@@ -45,3 +46,10 @@ export function Lightbox({ image, alt, isOpen, onClose }) {
     </div>
   );
 }
+
+Lightbox.propTypes = {
+  image: PropTypes.string,
+  alt: PropTypes.string,
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+};

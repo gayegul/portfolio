@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FadeIn } from './FadeIn';
 import { CompanyLogo } from './CompanyLogo';
 import { ANIMATION } from '../constants/animation';
@@ -57,3 +58,15 @@ export function ProjectCard({ project, index }) {
     </FadeIn>
   );
 }
+
+ProjectCard.propTypes = {
+  project: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    company: PropTypes.string.isRequired,
+    companyUrl: PropTypes.string.isRequired,
+    period: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    impact: PropTypes.string.isRequired,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
+};
