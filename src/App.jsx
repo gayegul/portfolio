@@ -14,10 +14,8 @@ import pressPhotoshoot from './assets/images/photos/press_photoshoot.jpg';
 // Constants
 const ANIMATION = {
   STAGGER_DELAY: 150,
-  HERO_TITLE_DELAY: 200,
   HERO_SUBTITLE_DELAY: 500,
   HERO_DESCRIPTION_DELAY: 700,
-  LETTER_STAGGER: 30,
   FADE_DURATION: 700,
   TRANSITION_DURATION: 300,
   NAV_SCROLL_THRESHOLD: 100,
@@ -37,36 +35,6 @@ const BLOB_CONFIG = [
 ];
 
 const SPARKLE_COUNT = 8;
-
-// Photo data - using placeholder colors to represent the actual images
-// In production, these would be actual image URLs
-const photos = {
-  satya: {
-    id: 'satya',
-    caption: 'Before presenting xCloud POC to Satya Nadella',
-    color: '#1a365d', // dark blue
-  },
-  e3Award: {
-    id: 'e3Award',
-    caption: "Best of E3 2019 — Tom's Guide",
-    color: '#166534', // xbox green
-  },
-  xcloudBooth: {
-    id: 'xcloudBooth', 
-    caption: 'Project xCloud booth at E3',
-    color: '#15803d',
-  },
-  launchDay: {
-    id: 'launchDay',
-    caption: 'xCloud Launch Day',
-    color: '#6b7280',
-  },
-  photoshoot: {
-    id: 'photoshoot',
-    caption: 'Microsoft marketing photoshoot',
-    color: '#d4d4d4',
-  },
-};
 
 // Data
 const personalInfo = {
@@ -145,13 +113,6 @@ const education = [
     url: 'https://www.metu.edu.tr/',
   },
 ];
-
-const LAYOUT_OPTIONS = {
-  singleAbout: { name: 'Single in About', description: 'One photo in About section' },
-  photoStrip: { name: 'Photo Strip', description: '4 photos in a row' },
-  fullDivider: { name: 'Full Divider', description: 'Full-width between sections' },
-  heroSide: { name: 'Hero + Side', description: 'Photo alongside your name' },
-};
 
 // Hooks
 function useScrollProgress() {
@@ -285,29 +246,6 @@ function FadeIn({ children, delay = 0, direction = 'up', className = '' }) {
   );
 }
 
-function AnimatedHeading({ children, as: Component = 'h1', delay = 0, className = '' }) {
-  const [ref, isVisible] = useIntersectionObserver();
-
-  return (
-    <Component ref={ref} className={className}>
-      {children.split('').map((char, index) => (
-        <span
-          key={index}
-          className="inline-block transition-all"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-            transitionDuration: `${ANIMATION.TRANSITION_DURATION}ms`,
-            transitionDelay: `${delay + index * ANIMATION.LETTER_STAGGER}ms`,
-          }}
-        >
-          {char === ' ' ? '\u00A0' : char}
-        </span>
-      ))}
-    </Component>
-  );
-}
-
 function SectionHeader({ children }) {
   return (
     <FadeIn>
@@ -315,28 +253,6 @@ function SectionHeader({ children }) {
         {children}
       </h2>
     </FadeIn>
-  );
-}
-
-// Photo placeholder component (replace with actual images in production)
-function PhotoPlaceholder({ photo, className = '', showCaption = true, aspectRatio = 'aspect-square' }) {
-  return (
-    <div className={`relative overflow-hidden rounded-xl group ${className}`}>
-      <div 
-        className={`${aspectRatio} w-full flex items-center justify-center text-white text-xs p-4 text-center`}
-        style={{ backgroundColor: photo.color }}
-      >
-        <div>
-          <div className="text-2xl mb-2">📸</div>
-          <div className="opacity-80">{photo.caption}</div>
-        </div>
-      </div>
-      {showCaption && (
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 opacity-0 group-hover:opacity-100 transition-opacity">
-          <p className="text-white text-xs">{photo.caption}</p>
-        </div>
-      )}
-    </div>
   );
 }
 
@@ -364,7 +280,7 @@ function EducationCard({ edu, index }) {
         href={edu.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="relative p-4 rounded-lg transition-all duration-300 hover:-translate-y-1 group block h-full"
+        className="relative p-3 sm:p-4 rounded-lg transition-all duration-300 hover:-translate-y-1 group block h-full"
         style={{
           backgroundColor: 'rgba(15, 23, 42, 0.5)',
           borderWidth: 1,
@@ -379,19 +295,19 @@ function EducationCard({ edu, index }) {
         }}
       >
         <div className="flex items-center gap-2 mb-1">
-          <span className="text-base font-semibold text-teal-400">
+          <span className="text-sm sm:text-base font-semibold text-teal-400">
             {edu.degree}
           </span>
-          <span className="text-base" title={edu.country}>
+          <span className="text-sm sm:text-base" title={edu.country}>
             {edu.flag}
           </span>
         </div>
-        
-        <p className="text-sm font-medium text-slate-200 mb-1 leading-snug">
+
+        <p className="text-xs sm:text-sm font-medium text-slate-200 mb-1 leading-snug">
           {edu.field}
         </p>
-        
-        <p className="text-xs text-slate-400 group-hover:text-teal-400 transition-colors flex items-center gap-1">
+
+        <p className="text-[11px] sm:text-xs text-slate-400 group-hover:text-teal-400 transition-colors flex items-center gap-1">
           {edu.school}
           <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
         </p>
@@ -488,14 +404,14 @@ function Navigation({ isVisible }) {
       }}
     >
       <div
-        className="border-b"
+        className="border-b px-4 sm:px-6"
         style={{
           backdropFilter: 'blur(12px)',
           backgroundColor: 'rgba(2, 6, 23, 0.8)',
           borderColor: 'rgba(30, 41, 59, 0.5)',
         }}
       >
-        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="max-w-5xl mx-auto py-4 flex items-center justify-between">
           <a
             href="#"
             className="text-base font-semibold text-slate-100 hover:text-teal-400 transition-colors"
@@ -574,7 +490,7 @@ function Navigation({ isVisible }) {
         {/* Mobile menu dropdown */}
         {isMobile && mobileMenuOpen && (
           <div className="border-t border-slate-800">
-            <div className="px-4 py-4 space-y-4">
+            <div className="max-w-5xl mx-auto py-4 space-y-4">
               <a 
                 href="#work" 
                 className="block text-slate-300 hover:text-teal-400 transition-colors"
@@ -640,19 +556,19 @@ function HeroSectionWithPhoto() {
     <header className="min-h-[30vh] lg:min-h-[60vh] flex items-center pt-16 sm:pt-20 px-4 sm:px-6 pb-4 lg:pb-0">
       <div className="max-w-5xl mx-auto w-full">
         <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-12">
-          <div className="flex-1 w-full">
+          <div className="flex-1 w-full lg:max-w-2xl">
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tight text-slate-100 mb-3 sm:mb-4">
               {personalInfo.name}
             </h1>
 
             <FadeIn delay={ANIMATION.HERO_SUBTITLE_DELAY}>
-              <p className="text-xl sm:text-2xl md:text-3xl text-slate-400 max-w-2xl leading-relaxed mb-4 sm:mb-6">
+              <p className="text-xl sm:text-2xl md:text-3xl text-slate-400 leading-relaxed mb-4 sm:mb-6">
                 {personalInfo.title}
               </p>
             </FadeIn>
 
             <FadeIn delay={ANIMATION.HERO_DESCRIPTION_DELAY}>
-              <p className="text-base sm:text-lg text-slate-500 max-w-xl leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-500 leading-relaxed">
                 Founding engineer on Xbox Cloud Gaming. Built and presented the prototype to Satya Nadella that secured project funding. Now at Seesaw, building for 25M+ students across 1 in 3 US elementary schools.
               </p>
             </FadeIn>
@@ -663,92 +579,21 @@ function HeroSectionWithPhoto() {
               href="https://www.tomsguide.com/us/best-of-e3-2019,review-6571.html"
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-full lg:w-auto rounded-2xl overflow-hidden border-2 border-slate-800 hover:border-teal-400 transition-colors"
+              className="block max-w-[220px] mx-auto lg:mx-0 lg:max-w-[280px] rounded-2xl overflow-hidden border-2 border-slate-800 hover:border-teal-400 transition-all"
+              style={{
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(20, 184, 166, 0.1)'
+              }}
             >
               <img
                 src={xcloudAward}
                 alt="xCloud award recognition"
-                className="w-full lg:w-80 h-auto object-contain"
+                className="w-full h-auto object-contain"
               />
             </a>
           </FadeIn>
         </div>
       </div>
     </header>
-  );
-}
-
-// Layout Option B: Standard hero (no photo)
-function HeroSection() {
-  return (
-    <header className="min-h-[30vh] lg:min-h-[60vh] flex items-center pt-16 sm:pt-20 px-4 sm:px-6 pb-4 lg:pb-0">
-      <div className="max-w-5xl mx-auto w-full">
-        <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tight text-slate-100 mb-3 sm:mb-4">
-          {personalInfo.name}
-        </h1>
-
-        <FadeIn delay={ANIMATION.HERO_SUBTITLE_DELAY}>
-          <p className="text-xl sm:text-2xl md:text-3xl text-slate-400 max-w-2xl leading-relaxed mb-4 sm:mb-6">
-            {personalInfo.title}
-          </p>
-        </FadeIn>
-
-        <FadeIn delay={ANIMATION.HERO_DESCRIPTION_DELAY}>
-          <p className="text-base sm:text-lg text-slate-500 max-w-xl leading-relaxed">
-            Founding engineer on Xbox Cloud Gaming. Built and presented the prototype to Satya Nadella that secured project funding. Now at Seesaw, building for 25M+ students across 1 in 3 US elementary schools.
-          </p>
-        </FadeIn>
-      </div>
-    </header>
-  );
-}
-
-// Photo Strip Component
-function PhotoStrip() {
-  const stripPhotos = [photos.satya, photos.xcloudBooth, photos.e3Award, photos.launchDay];
-
-  return (
-    <FadeIn>
-      <div className="py-12 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {stripPhotos.map((photo, index) => (
-              <PhotoPlaceholder
-                key={photo.id}
-                photo={photo}
-                className="transform hover:scale-105 transition-transform duration-300"
-                aspectRatio="aspect-[4/3]"
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </FadeIn>
-  );
-}
-
-// Full Width Divider Photo
-function FullWidthDivider() {
-  return (
-    <FadeIn>
-      <div className="py-8 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="relative rounded-2xl overflow-hidden" style={{ height: '300px' }}>
-            <div 
-              className="absolute inset-0 flex items-center justify-center text-white"
-              style={{ backgroundColor: photos.satya.color }}
-            >
-              <div className="text-center">
-                <div className="text-4xl mb-4">📸</div>
-                <div className="text-xl font-medium mb-2">Before presenting xCloud to Satya Nadella</div>
-                <div className="text-sm opacity-70">The demo that got us the budget to scale</div>
-              </div>
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 to-transparent" />
-          </div>
-        </div>
-      </div>
-    </FadeIn>
   );
 }
 
@@ -892,45 +737,6 @@ function Press() {
   );
 }
 
-// About Section with Single Photo
-function AboutSectionWithPhoto() {
-  return (
-    <section id="about" className="py-16 px-6" style={{ scrollMarginTop: '5rem' }}>
-      <div className="max-w-5xl mx-auto">
-        <SectionHeader>About</SectionHeader>
-        
-        <div className="flex gap-12 items-start">
-          <div className="flex-1">
-            <FadeIn>
-              <p className="text-xl text-slate-300 leading-relaxed mb-12">
-                Three degrees in engineering, then a pivot to software as an apprentice at Microsoft. Now, I own things end-to-end: specs, architecture, implementation, tests, deployment. I like solving problems, building, and shipping fast.
-              </p>
-            </FadeIn>
-            
-            {/* Education Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {education.map((edu, index) => (
-                <EducationCard key={index} edu={edu} index={index} />
-              ))}
-            </div>
-          </div>
-          
-          <FadeIn direction="left" className="hidden lg:block flex-shrink-0">
-            <div className="w-72">
-              <PhotoPlaceholder 
-                photo={photos.satya} 
-                aspectRatio="aspect-[3/4]"
-                className="rounded-2xl"
-              />
-            </div>
-          </FadeIn>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// About Section Standard
 function AboutSection() {
   return (
     <section id="about" className="py-8 sm:py-12 px-4 sm:px-6" style={{ scrollMarginTop: '5rem' }}>
@@ -955,37 +761,6 @@ function AboutSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-function LayoutSelector({ currentLayout, onLayoutChange }) {
-  return (
-    <div 
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 p-4 rounded-2xl border"
-      style={{ 
-        zIndex: 100, 
-        backgroundColor: 'rgba(15, 23, 42, 0.95)',
-        borderColor: 'rgb(51, 65, 85)',
-        backdropFilter: 'blur(12px)',
-      }}
-    >
-      <span className="text-xs text-slate-500 uppercase tracking-wide">Photo Layout</span>
-      <div className="flex gap-2">
-        {Object.entries(LAYOUT_OPTIONS).map(([key, { name }]) => (
-          <button
-            key={key}
-            onClick={() => onLayoutChange(key)}
-            className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-all ${
-              currentLayout === key
-                ? 'bg-teal-500 text-slate-950'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
-            }`}
-          >
-            {name}
-          </button>
-        ))}
-      </div>
-    </div>
   );
 }
 
