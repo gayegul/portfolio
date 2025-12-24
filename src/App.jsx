@@ -396,6 +396,7 @@ function Navigation({ isVisible }) {
   return (
     <nav
       className="fixed top-0 left-0 right-0 transition-all duration-300"
+      aria-label="Main navigation"
       style={{
         zIndex: 40,
         opacity: isVisible ? 1 : 0,
@@ -438,7 +439,8 @@ function Navigation({ isVisible }) {
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-slate-100 transition-colors"
+                className="text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
+                aria-label="LinkedIn profile"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
@@ -447,15 +449,17 @@ function Navigation({ isVisible }) {
                 href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-slate-100 transition-colors"
+                className="text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
+                aria-label="GitHub profile"
               >
                 <Github className="w-5 h-5" />
               </a>
 
               <button
                 onClick={copyEmailToClipboard}
-                className="relative text-slate-400 hover:text-slate-100 transition-colors"
+                className="relative text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
                 title={emailCopied ? 'Email copied!' : 'Copy email to clipboard'}
+                aria-label={emailCopied ? 'Email copied!' : 'Copy email to clipboard'}
               >
                 <Mail className="w-5 h-5" />
                 {emailCopied && (
@@ -517,7 +521,8 @@ function Navigation({ isVisible }) {
                   href={personalInfo.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-slate-100 transition-colors"
+                  className="text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
+                  aria-label="LinkedIn profile"
                 >
                   <Linkedin className="w-5 h-5" />
                 </a>
@@ -525,14 +530,16 @@ function Navigation({ isVisible }) {
                   href={personalInfo.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-slate-100 transition-colors"
+                  className="text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
+                  aria-label="GitHub profile"
                 >
                   <Github className="w-5 h-5" />
                 </a>
                 <button
                   onClick={copyEmailToClipboard}
-                  className="relative text-slate-400 hover:text-slate-100 transition-colors"
+                  className="relative text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
                   title={emailCopied ? 'Email copied!' : 'Copy email to clipboard'}
+                  aria-label={emailCopied ? 'Email copied!' : 'Copy email to clipboard'}
                 >
                   <Mail className="w-5 h-5" />
                   {emailCopied && (
@@ -599,7 +606,7 @@ function HeroSectionWithPhoto() {
 
 function ExperienceSection() {
   return (
-    <section id="work" className="py-4 lg:py-16 px-4 sm:px-6" style={{ scrollMarginTop: '5rem' }}>
+    <section id="work" className="py-4 lg:py-16 px-4 sm:px-6" aria-label="Work experience" style={{ scrollMarginTop: '5rem' }}>
       <div className="max-w-5xl mx-auto">
         <SectionHeader>Work</SectionHeader>
         <div className="grid gap-4 sm:gap-6">
@@ -636,11 +643,14 @@ function Lightbox({ image, alt, isOpen, onClose }) {
       className="fixed inset-0 bg-black/90 flex items-center justify-center p-4 backdrop-blur-sm"
       style={{ zIndex: 9999 }}
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Image viewer"
     >
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 text-white hover:text-teal-400 transition-colors"
-        aria-label="Close"
+        className="absolute top-4 right-4 text-white hover:text-teal-400 focus-visible:text-teal-400 transition-colors"
+        aria-label="Close image viewer"
       >
         <X className="w-8 h-8" />
       </button>
@@ -677,7 +687,7 @@ function Press() {
 
   return (
     <>
-      <section className="py-12 lg:py-16 px-4 sm:px-6">
+      <section className="py-12 lg:py-16 px-4 sm:px-6" aria-label="Press coverage">
         <div className="max-w-5xl mx-auto">
           <SectionHeader>Press</SectionHeader>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -689,37 +699,39 @@ function Press() {
                       href={item.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs font-medium text-slate-400 hover:text-teal-400 transition-colors flex items-center gap-1"
+                      className="text-sm font-medium text-slate-300 hover:text-teal-400 focus-visible:text-teal-400 transition-colors flex items-center gap-1.5"
                       onClick={(e) => handleTitleClick(item.url, e)}
                     >
                       {item.logo ? (
-                        <img src={item.logo} alt={item.title} className="h-4 object-contain" />
+                        <img src={item.logo} alt={item.title} className="h-5 object-contain" />
                       ) : (
                         item.title
                       )}
-                      <ExternalLink className="w-3 h-3" />
+                      <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   ) : (
-                    <div className="text-xs font-medium text-slate-400">
+                    <div className="text-sm font-medium text-slate-300">
                       {item.logo ? (
-                        <img src={item.logo} alt={item.title} className="h-4 object-contain" />
+                        <img src={item.logo} alt={item.title} className="h-5 object-contain" />
                       ) : (
                         item.title
                       )}
                     </div>
                   )}
-                  <div
-                    className="relative rounded-xl border-2 border-slate-800 hover:border-teal-400 group cursor-pointer overflow-hidden transition-colors"
+                  <button
+                    className="relative rounded-xl border-2 border-slate-800 hover:border-teal-400 focus-visible:border-teal-400 group cursor-pointer overflow-hidden transition-colors w-full"
                     style={{ backgroundColor: item.background_color || '#0f172a' }}
                     onClick={() => handleImageClick(item)}
+                    aria-label={`View full image: ${item.alt}`}
                   >
                     <img
                       src={item.image}
-                      alt={item.alt}
+                      alt=""
+                      role="presentation"
                       className={`w-full h-56 object-${item.fit} transition-all duration-500`}
                       style={{ objectPosition: item.position }}
                     />
-                  </div>
+                  </button>
                 </div>
               </FadeIn>
             ))}
@@ -739,7 +751,7 @@ function Press() {
 
 function AboutSection() {
   return (
-    <section id="about" className="py-8 sm:py-12 px-4 sm:px-6" style={{ scrollMarginTop: '5rem' }}>
+    <section id="about" className="py-8 sm:py-12 px-4 sm:px-6" aria-label="About and education" style={{ scrollMarginTop: '5rem' }}>
       <div className="max-w-5xl mx-auto">
         <SectionHeader>About</SectionHeader>
         <div className="max-w-2xl mb-12 sm:mb-16">
@@ -778,7 +790,8 @@ function Footer() {
               href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-500 hover:text-teal-400 transition-colors"
+              className="text-slate-500 hover:text-teal-400 focus-visible:text-teal-400 transition-colors"
+              aria-label="LinkedIn profile"
             >
               <Linkedin className="w-5 h-5" />
             </a>
@@ -786,13 +799,15 @@ function Footer() {
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-500 hover:text-teal-400 transition-colors"
+              className="text-slate-500 hover:text-teal-400 focus-visible:text-teal-400 transition-colors"
+              aria-label="GitHub profile"
             >
               <Github className="w-5 h-5" />
             </a>
             <a
               href={`mailto:${personalInfo.email}`}
-              className="text-slate-500 hover:text-teal-400 transition-colors text-sm"
+              className="text-slate-500 hover:text-teal-400 focus-visible:text-teal-400 transition-colors text-sm"
+              aria-label={`Email ${personalInfo.email}`}
             >
               {personalInfo.email}
             </a>
