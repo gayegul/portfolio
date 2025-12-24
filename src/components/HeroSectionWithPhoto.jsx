@@ -41,6 +41,7 @@ export function HeroSectionWithPhoto() {
                 src={xcloudAward}
                 alt="xCloud award recognition"
                 className="w-full h-auto object-contain"
+                loading="lazy"
               />
             </a>
           </FadeIn>

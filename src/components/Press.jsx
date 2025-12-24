@@ -55,7 +55,7 @@ export function Press() {
                       onClick={(e) => handleTitleClick(item.url, e)}
                     >
                       {item.logo ? (
-                        <img src={item.logo} alt={item.title} className="h-5 object-contain" />
+                        <img src={item.logo} alt={item.title} className="h-5 object-contain" loading="lazy" />
                       ) : (
                         item.title
                       )}
@@ -64,7 +64,7 @@ export function Press() {
                   ) : (
                     <div className="text-sm font-medium text-slate-300">
                       {item.logo ? (
-                        <img src={item.logo} alt={item.title} className="h-5 object-contain" />
+                        <img src={item.logo} alt={item.title} className="h-5 object-contain" loading="lazy" />
                       ) : (
                         item.title
                       )}
@@ -82,6 +82,7 @@ export function Press() {
                       role="presentation"
                       className={`w-full h-56 object-${item.fit} transition-all duration-500`}
                       style={{ objectPosition: item.position }}
+                      loading="lazy"
                     />
                   </button>
                 </div>

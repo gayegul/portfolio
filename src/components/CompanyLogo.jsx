@@ -14,6 +14,6 @@ export function CompanyLogo({ company }) {
   }
 
   return (
-    <img src={seesawLogo} alt="Seesaw" className="w-6 h-6 object-contain" />
+    <img src={seesawLogo} alt="Seesaw" className="w-6 h-6 object-contain" loading="lazy" />
   );
 }
