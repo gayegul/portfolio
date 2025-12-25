@@ -18,6 +18,18 @@ export function Navigation({ isVisible }: NavigationProps) {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Handle Escape key to close mobile menu
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [mobileMenuOpen]);
+
   const copyEmailToClipboard = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(personalInfo.email);
@@ -107,7 +119,11 @@ export function Navigation({ isVisible }: NavigationProps) {
               >
                 <Mail className="w-5 h-5" />
                 {emailCopied && (
-                  <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-teal-400 whitespace-nowrap">
+                  <span
+                    role="status"
+                    aria-live="polite"
+                    className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-teal-400 whitespace-nowrap"
+                  >
                     Copied!
                   </span>
                 )}
@@ -121,6 +137,7 @@ export function Navigation({ isVisible }: NavigationProps) {
               className="p-2 text-slate-400 hover:text-slate-100 transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? (
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -197,7 +214,11 @@ export function Navigation({ isVisible }: NavigationProps) {
                 >
                   <Mail className="w-5 h-5" />
                   {emailCopied && (
-                    <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-teal-400 whitespace-nowrap">
+                    <span
+                      role="status"
+                      aria-live="polite"
+                      className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-teal-400 whitespace-nowrap"
+                    >
                       Copied!
                     </span>
                   )}
