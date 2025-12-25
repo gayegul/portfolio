@@ -1,4 +1,3 @@
-import React from 'react';
 import { ExternalLink } from 'lucide-react';
 import { FadeIn } from './FadeIn';
 import { Education } from '../data/education';
@@ -18,9 +17,7 @@ export function EducationCard({ edu, index }: EducationCardProps) {
         className="relative p-3 sm:p-4 rounded-lg border border-slate-border bg-slate-card transition-all duration-300 hover:-translate-y-1 hover:border-teal-400/40 group block h-full"
       >
         <div className="flex items-center gap-2 mb-1">
-          <span className="text-sm sm:text-base font-semibold text-teal-400">
-            {edu.degree}
-          </span>
+          <span className="text-sm sm:text-base font-semibold text-teal-400">{edu.degree}</span>
           <span className="text-sm sm:text-base" title={edu.country}>
             {edu.flag}
           </span>

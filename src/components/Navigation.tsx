@@ -58,15 +58,24 @@ export function Navigation({ isVisible }: NavigationProps) {
           {/* Desktop nav */}
           {!isMobile && (
             <div className="flex items-center gap-6">
-              <a href="#work" className="text-sm text-slate-400 hover:text-slate-100 transition-colors">
+              <a
+                href="#work"
+                className="text-sm text-slate-400 hover:text-slate-100 transition-colors"
+              >
                 Work
               </a>
 
-              <a href="#about" className="text-sm text-slate-400 hover:text-slate-100 transition-colors">
+              <a
+                href="#about"
+                className="text-sm text-slate-400 hover:text-slate-100 transition-colors"
+              >
                 About
               </a>
 
-              <a href="#education" className="text-sm text-slate-400 hover:text-slate-100 transition-colors">
+              <a
+                href="#education"
+                className="text-sm text-slate-400 hover:text-slate-100 transition-colors"
+              >
                 Education
               </a>
 
@@ -115,11 +124,21 @@ export function Navigation({ isVisible }: NavigationProps) {
             >
               {mobileMenuOpen ? (
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               ) : (
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 </svg>
               )}
             </button>

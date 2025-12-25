@@ -1,9 +1,10 @@
 import { renderHook } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import React from 'react';
 import { useIntersectionObserver } from './useIntersectionObserver';
 
 describe('useIntersectionObserver', () => {
-  let mockIntersectionObserver: any;
+  let mockIntersectionObserver: ReturnType<typeof vi.fn>;
   let observeCallback: IntersectionObserverCallback;
 
   beforeEach(() => {
@@ -16,7 +17,8 @@ describe('useIntersectionObserver', () => {
       };
     });
 
-    global.IntersectionObserver = mockIntersectionObserver as any;
+    global.IntersectionObserver =
+      mockIntersectionObserver as unknown as typeof IntersectionObserver;
   });
 
   it('returns a ref and initial visibility state of false', () => {
@@ -34,10 +36,10 @@ describe('useIntersectionObserver', () => {
 
     // Simulate ref being attached to an element
     const mockElement = document.createElement('div');
-    (ref as any).current = mockElement;
+    (ref as React.MutableRefObject<HTMLElement | null>).current = mockElement;
 
     // Rerender to trigger useEffect
-    const { result: updatedResult, rerender } = renderHook(() => useIntersectionObserver());
+    const { result: _updatedResult, rerender } = renderHook(() => useIntersectionObserver());
     rerender();
 
     // Simulate intersection

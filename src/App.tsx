@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 
 // Constants
 import { ANIMATION } from './constants/animation';
@@ -13,10 +13,18 @@ import { Navigation } from './components/Navigation';
 import { HeroSectionWithPhoto } from './components/HeroSectionWithPhoto';
 
 // Components (lazy load)
-const ExperienceSection = lazy(() => import('./components/ExperienceSection').then(module => ({ default: module.ExperienceSection })));
-const Press = lazy(() => import('./components/Press').then(module => ({ default: module.Press })));
-const AboutSection = lazy(() => import('./components/AboutSection').then(module => ({ default: module.AboutSection })));
-const Footer = lazy(() => import('./components/Footer').then(module => ({ default: module.Footer })));
+const ExperienceSection = lazy(() =>
+  import('./components/ExperienceSection').then((module) => ({ default: module.ExperienceSection }))
+);
+const Press = lazy(() =>
+  import('./components/Press').then((module) => ({ default: module.Press }))
+);
+const AboutSection = lazy(() =>
+  import('./components/AboutSection').then((module) => ({ default: module.AboutSection }))
+);
+const Footer = lazy(() =>
+  import('./components/Footer').then((module) => ({ default: module.Footer }))
+);
 
 export default function Portfolio() {
   const scrollProgress = useScrollProgress();

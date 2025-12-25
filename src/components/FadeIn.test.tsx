@@ -5,7 +5,7 @@ import { FadeIn } from './FadeIn';
 describe('FadeIn', () => {
   beforeEach(() => {
     // Mock IntersectionObserver
-    global.IntersectionObserver = vi.fn((callback) => ({
+    global.IntersectionObserver = vi.fn(() => ({
       observe: vi.fn(),
       disconnect: vi.fn(),
       unobserve: vi.fn(),
@@ -13,7 +13,7 @@ describe('FadeIn', () => {
       rootMargin: '',
       thresholds: [],
       takeRecords: () => [],
-    })) as any;
+    })) as unknown as typeof IntersectionObserver;
   });
 
   it('renders children correctly', () => {

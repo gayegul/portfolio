@@ -1,4 +1,3 @@
-import React from 'react';
 import seesawLogo from '../assets/images/logos/seesawlogo.png';
 
 interface CompanyLogoProps {
@@ -17,8 +16,5 @@ export function CompanyLogo({ company }: CompanyLogoProps) {
     );
   }
 
-  return (
-    <img src={seesawLogo} alt="Seesaw" className="w-6 h-6 object-contain" loading="lazy" />
-  );
+  return <img src={seesawLogo} alt="Seesaw" className="w-6 h-6 object-contain" loading="lazy" />;
 }
-

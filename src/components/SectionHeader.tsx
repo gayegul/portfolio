@@ -14,4 +14,3 @@ export function SectionHeader({ children }: SectionHeaderProps) {
     </FadeIn>
   );
 }
-

@@ -1,4 +1,3 @@
-import React from 'react';
 import { FadeIn } from './FadeIn';
 import { personalInfo } from '../data/personalInfo';
 import { ANIMATION } from '../constants/animation';
@@ -22,12 +21,18 @@ export function HeroSectionWithPhoto() {
 
             <FadeIn delay={ANIMATION.HERO_DESCRIPTION_DELAY}>
               <p className="text-base sm:text-lg text-slate-500 leading-relaxed">
-                Founding engineer on Xbox Cloud Gaming. Built and presented the prototype to Satya Nadella that secured project funding. Now at Seesaw, building for 25M+ students across 1 in 3 US elementary schools.
+                Founding engineer on Xbox Cloud Gaming. Built and presented the prototype to Satya
+                Nadella that secured project funding. Now at Seesaw, building for 25M+ students
+                across 1 in 3 US elementary schools.
               </p>
             </FadeIn>
           </div>
 
-          <FadeIn delay={ANIMATION.HERO_DESCRIPTION_DELAY} direction="left" className="w-full lg:w-auto lg:flex-shrink-0">
+          <FadeIn
+            delay={ANIMATION.HERO_DESCRIPTION_DELAY}
+            direction="left"
+            className="w-full lg:w-auto lg:flex-shrink-0"
+          >
             <a
               href="https://www.tomsguide.com/us/best-of-e3-2019,review-6571.html"
               target="_blank"

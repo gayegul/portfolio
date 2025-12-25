@@ -30,9 +30,7 @@ export class ErrorBoundary extends React.Component {
       return (
         <div className="min-h-screen flex items-center justify-center px-4 bg-navy-dark">
           <div className="max-w-md text-center">
-            <h1 className="text-4xl font-bold text-slate-100 mb-4">
-              Oops!
-            </h1>
+            <h1 className="text-4xl font-bold text-slate-100 mb-4">Oops!</h1>
             <p className="text-lg text-slate-400 mb-6">
               Something went wrong. Please try refreshing the page.
             </p>

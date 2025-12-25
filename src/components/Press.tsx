@@ -35,12 +35,52 @@ export function Press() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const pressItems = useMemo(() => [
-    { image: wiredMagazine, alt: "Wired Magazine - Xbox Cloud Gaming", title: "Wired", logo: wiredLogo, position: "left center", mobilePosition: "left top", fit: "cover", url: "https://www.wired.com/story/xbox-cloud-gaming-exclusive/" },
-    { image: pressSocial, alt: "Microsoft Blog - Project xCloud", title: "TechRadar", logo: techradarLogo, position: "top", mobilePosition: "top", background_color: "white", fit: "contain", url: "https://www.techradar.com/news/prototype-xbox-controllers-for-phones-and-tablets-show-up-in-research-papers" },
-    { image: xcloudBooth, alt: "GeekWire - Project xCloud", title: "GeekWire", logo: geekwireLogo, position: "center", mobilePosition: "top", fit: "cover", url: "https://www.geekwire.com/2019/microsoft-will-bring-project-xcloud-game-streaming-service-windows-10-pcs/" },
-    { image: pressPhotoshoot, alt: "Microsoft marketing photoshoot", title: "Microsoft Blog", logo: msftLogo, position: "center 15%", mobilePosition: "top", fit: "cover", url: "https://blogs.microsoft.com/blog/2018/10/08/project-xcloud-gaming-with-you-at-the-center/" },
-  ], []);
+  const pressItems = useMemo(
+    () => [
+      {
+        image: wiredMagazine,
+        alt: 'Wired Magazine - Xbox Cloud Gaming',
+        title: 'Wired',
+        logo: wiredLogo,
+        position: 'left center',
+        mobilePosition: 'left top',
+        fit: 'cover',
+        url: 'https://www.wired.com/story/xbox-cloud-gaming-exclusive/',
+      },
+      {
+        image: pressSocial,
+        alt: 'Microsoft Blog - Project xCloud',
+        title: 'TechRadar',
+        logo: techradarLogo,
+        position: 'top',
+        mobilePosition: 'top',
+        background_color: 'white',
+        fit: 'contain',
+        url: 'https://www.techradar.com/news/prototype-xbox-controllers-for-phones-and-tablets-show-up-in-research-papers',
+      },
+      {
+        image: xcloudBooth,
+        alt: 'GeekWire - Project xCloud',
+        title: 'GeekWire',
+        logo: geekwireLogo,
+        position: 'center',
+        mobilePosition: 'top',
+        fit: 'cover',
+        url: 'https://www.geekwire.com/2019/microsoft-will-bring-project-xcloud-game-streaming-service-windows-10-pcs/',
+      },
+      {
+        image: pressPhotoshoot,
+        alt: 'Microsoft marketing photoshoot',
+        title: 'Microsoft Blog',
+        logo: msftLogo,
+        position: 'center 15%',
+        mobilePosition: 'top',
+        fit: 'cover',
+        url: 'https://blogs.microsoft.com/blog/2018/10/08/project-xcloud-gaming-with-you-at-the-center/',
+      },
+    ],
+    []
+  );
 
   const handleImageClick = useCallback((item: PressItem) => {
     setLightboxImage(item);
@@ -75,7 +115,12 @@ export function Press() {
                       onClick={(e) => handleTitleClick(item.url, e)}
                     >
                       {item.logo ? (
-                        <img src={item.logo} alt={item.title} className="h-5 object-contain" loading="lazy" />
+                        <img
+                          src={item.logo}
+                          alt={item.title}
+                          className="h-5 object-contain"
+                          loading="lazy"
+                        />
                       ) : (
                         item.title
                       )}
@@ -84,7 +129,12 @@ export function Press() {
                   ) : (
                     <div className="text-sm font-medium text-slate-300">
                       {item.logo ? (
-                        <img src={item.logo} alt={item.title} className="h-5 object-contain" loading="lazy" />
+                        <img
+                          src={item.logo}
+                          alt={item.title}
+                          className="h-5 object-contain"
+                          loading="lazy"
+                        />
                       ) : (
                         item.title
                       )}

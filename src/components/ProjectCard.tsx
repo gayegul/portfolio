@@ -1,4 +1,3 @@
-import React from 'react';
 import { FadeIn } from './FadeIn';
 import { CompanyLogo } from './CompanyLogo';
 import { ANIMATION } from '../constants/animation';
@@ -32,13 +31,13 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               <span>{project.company}</span>
               <CompanyLogo company={project.company} />
             </a>
-            <span className="text-sm text-slate-600 tabular-nums">
-              {project.period}
-            </span>
+            <span className="text-sm text-slate-600 tabular-nums">{project.period}</span>
           </div>
         </div>
 
-        <p className="text-sm sm:text-base text-slate-400 leading-relaxed mb-3 sm:mb-4">{project.description}</p>
+        <p className="text-sm sm:text-base text-slate-400 leading-relaxed mb-3 sm:mb-4">
+          {project.description}
+        </p>
 
         <p className="text-sm sm:text-base text-teal-400 font-medium flex items-center gap-2">
           <span>↳</span>

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { BLOB_CONFIG, SPARKLE_COUNT } from '../constants/animation';
 
 interface MorphingBackgroundProps {
