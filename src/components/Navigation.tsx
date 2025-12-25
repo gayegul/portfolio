@@ -78,6 +78,13 @@ export function Navigation({ isVisible }: NavigationProps) {
               </a>
 
               <a
+                href="#press"
+                className="text-sm text-slate-400 hover:text-slate-100 transition-colors"
+              >
+                Press
+              </a>
+
+              <a
                 href="#about"
                 className="text-sm text-slate-400 hover:text-slate-100 transition-colors"
               >
@@ -172,6 +179,13 @@ export function Navigation({ isVisible }: NavigationProps) {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Work
+              </a>
+              <a
+                href="#press"
+                className="block text-slate-300 hover:text-teal-400 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Press
               </a>
               <a
                 href="#about"

@@ -99,7 +99,11 @@ export function Press() {
 
   return (
     <>
-      <section className="py-12 lg:py-16 px-4 sm:px-6" aria-label="Press coverage">
+      <section
+        id="press"
+        className="py-12 lg:py-16 px-4 sm:px-6 scroll-mt-nav"
+        aria-label="Press coverage"
+      >
         <div className="max-w-5xl mx-auto">
           <SectionHeader>Press</SectionHeader>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
