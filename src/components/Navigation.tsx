@@ -99,6 +99,16 @@ export function Navigation({ isVisible }: NavigationProps) {
               </a>
 
               <a
+                href="/Gaye_Bulut_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-slate-400 hover:text-teal-400 transition-colors"
+                aria-label="View resume"
+              >
+                Resume
+              </a>
+
+              <a
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -200,6 +210,16 @@ export function Navigation({ isVisible }: NavigationProps) {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Education
+              </a>
+              <a
+                href="/Gaye_Bulut_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-slate-300 hover:text-teal-400 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="View resume"
+              >
+                Resume
               </a>
               <div className="flex items-center gap-4 pt-2">
                 <a
