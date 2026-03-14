@@ -7,10 +7,10 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className="py-8 sm:py-12 px-4 sm:px-6 scroll-mt-nav"
+      className="py-8 sm:py-12 px-4 sm:px-6 xl:px-8 scroll-mt-nav"
       aria-label="About and education"
     >
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
         <SectionHeader>About</SectionHeader>
         <div className="mb-12 sm:mb-16">
           <FadeIn>

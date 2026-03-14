@@ -101,10 +101,10 @@ export function Press() {
     <>
       <section
         id="press"
-        className="py-12 lg:py-16 px-4 sm:px-6 scroll-mt-nav"
+        className="py-12 lg:py-16 px-4 sm:px-6 xl:px-8 scroll-mt-nav"
         aria-label="Press coverage"
       >
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
           <SectionHeader>Press</SectionHeader>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {pressItems.map((item, index) => (
@@ -154,7 +154,7 @@ export function Press() {
                       src={item.image}
                       alt=""
                       role="presentation"
-                      className={`w-full h-40 sm:h-56 object-${item.fit} transition-all duration-500`}
+                      className={`w-full h-40 sm:h-56 xl:h-64 object-${item.fit} transition-all duration-500`}
                       style={{ objectPosition: isMobile ? item.mobilePosition : item.position }}
                       loading="lazy"
                     />

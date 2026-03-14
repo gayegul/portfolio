@@ -57,8 +57,8 @@ export function Navigation({ isVisible }: NavigationProps) {
         pointerEvents: isVisible ? 'auto' : 'none',
       }}
     >
-      <div className="border-b border-nav-border bg-nav-bg backdrop-blur-xl px-4 sm:px-6">
-        <div className="max-w-5xl mx-auto py-4 flex items-center justify-between">
+      <div className="border-b border-nav-border bg-nav-bg backdrop-blur-xl px-4 sm:px-6 xl:px-8">
+        <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto py-4 flex items-center justify-between">
           <a
             href="#"
             onClick={scrollToTop}
@@ -182,7 +182,7 @@ export function Navigation({ isVisible }: NavigationProps) {
         {/* Mobile menu dropdown */}
         {isMobile && mobileMenuOpen && (
           <div className="border-t border-slate-800">
-            <div className="max-w-5xl mx-auto py-4 space-y-4">
+            <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto py-4 space-y-4">
               <a
                 href="#work"
                 className="block text-slate-300 hover:text-teal-400 transition-colors"

@@ -12,18 +12,36 @@ export function useIntersectionObserver(
     const element = ref.current;
     if (!element) return;
 
+    // Check if element is already visible in viewport on mount
+    const rect = element.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
           observer.disconnect();
+          clearTimeout(fallbackTimer);
         }
       },
       { threshold, rootMargin }
     );
 
     observer.observe(element);
-    return () => observer.disconnect();
+
+    // Safety net: ensure visibility if observer never fires
+    const fallbackTimer = setTimeout(() => {
+      setIsVisible(true);
+      observer.disconnect();
+    }, 2000);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(fallbackTimer);
+    };
   }, [threshold, rootMargin]);
 
   return [ref, isVisible];

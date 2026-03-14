@@ -3,8 +3,8 @@ import { personalInfo } from '../data/personalInfo';
 
 export function Footer() {
   return (
-    <footer className="py-8 sm:py-12 px-4 sm:px-6 border-t border-slate-800">
-      <div className="max-w-5xl mx-auto">
+    <footer className="py-8 sm:py-12 px-4 sm:px-6 xl:px-8 border-t border-slate-800">
+      <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-slate-500">
             © {new Date().getFullYear()} {personalInfo.name}
