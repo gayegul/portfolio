@@ -6,7 +6,7 @@ import { ANIMATION } from './constants/animation';
 // Components (eager load)
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Navigation } from './components/Navigation';
-import { HeroSectionWithPhoto } from './components/HeroSectionWithPhoto';
+import { Hero } from './components/v2/Hero';
 
 // Components (lazy load)
 const ExperienceSection = lazy(() =>
@@ -47,7 +47,7 @@ export default function Portfolio() {
         <Navigation isVisible={navVisible} />
 
         <main id="main-content" className="relative z-10">
-          <HeroSectionWithPhoto />
+          <Hero />
           <Suspense fallback={<div className="min-h-screen" />}>
             <ExperienceSection />
             <Press />
