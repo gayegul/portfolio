@@ -14,7 +14,7 @@ export const projects: Project[] = [
     companyUrl: 'https://web.seesaw.me',
     period: '2023 – Present',
     description:
-      'Rebuilt 2 of 4 core platform libraries from Angular/Jinja to React + TypeScript. Created a shared component library adopted platform-wide. Led the company rebrand: new design system, color palette, and typography across all libraries.',
+      'I rebuilt 2 of 4 core platform libraries from Angular/Jinja to React + TypeScript and shipped a shared component library that the rest of the platform adopted. I led the rebrand rollout: new design system, palette, and typography, threaded through every library.',
     impact: '44-48% faster page loads, 25M+ users',
   },
   {
@@ -23,7 +23,7 @@ export const projects: Project[] = [
     companyUrl: 'https://web.seesaw.me',
     period: '2023 – Present',
     description:
-      'Added i18n and RTL support across a mixed codebase (Jinja, Angular, React, React Native). Full bidirectional support for Arabic, Hebrew, and 30+ languages. Built admin features for K-12 standards so districts can track student progress against state benchmarks.',
+      'I added i18n and RTL support across a mixed codebase of Jinja, Angular, React, and React Native. Full bidirectional support for Arabic, Hebrew, and 30+ languages. I also built admin features for K-12 standards so districts can track student progress against state benchmarks.',
     impact: '30+ languages, 130+ countries',
   },
   {
@@ -32,7 +32,7 @@ export const projects: Project[] = [
     companyUrl: 'https://www.xbox.com/en-US/cloud-gaming',
     period: '2018 – 2022',
     description:
-      'One of the first 10 engineers. Built the first player-facing prototype, presented it to Satya Nadella, and that demo got us the budget to scale. As xCloud grew, I shifted to backend: microservices for OS updates and server pool management across the fleet.',
+      'I came in as one of the first 10 engineers. I built the first player-facing prototype: a browser-based client that streamed a live Xbox session to a phone. Xbox demoed it to Satya Nadella, and that demo secured the funding that turned the internal project into the public Cloud Gaming product. As xCloud scaled, I moved to the backend and shipped microservices for OS updates and server-pool management across the fleet.',
     impact: 'POC to global launch, 150,000+ servers',
   },
   {
@@ -41,7 +41,7 @@ export const projects: Project[] = [
     companyUrl: 'https://www.xbox.com',
     period: '2016 – 2018',
     description:
-      'Built the tools that tracked game title readiness for Xbox backwards compatibility. The program became a fan favorite and half of Xbox One users played legacy games through it.',
+      'I built the tooling that tracked game-title readiness for the Xbox backwards-compatibility program. The program became a fan favorite, and half of Xbox One users played legacy games through it.',
     impact: '50% of Xbox One users played legacy games',
   },
 ];

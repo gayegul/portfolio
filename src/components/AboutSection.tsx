@@ -13,9 +13,9 @@ export function AboutSection() {
         <SectionHeader>About</SectionHeader>
         <div className="mb-12 sm:mb-16">
           <p className="text-lg sm:text-xl text-slate-300 leading-relaxed">
-            Three degrees in engineering, then a pivot to software as an apprentice at Microsoft.
-            Now, I own things end-to-end: specs, architecture, implementation, tests, deployment.
-            I like solving problems, building, and shipping fast.
+            Three engineering degrees, none in software. I pivoted in through a Microsoft
+            apprenticeship in 2016, and I've been shipping ever since: specs, architecture, code,
+            tests, deploys. I like solving problems and shipping fast.
           </p>
         </div>
 

@@ -16,9 +16,8 @@ export function HeroSectionWithPhoto() {
             </p>
 
             <p className="text-base sm:text-lg text-slate-500 leading-relaxed">
-              Founding engineer on Xbox Cloud Gaming. Built and presented the prototype to Satya
-              Nadella that secured project funding. Now at Seesaw, building for 25M+ students
-              across 1 in 3 US elementary schools.
+              I built the prototype Xbox demoed to Satya Nadella. It secured the funding that
+              became Cloud Gaming. Now I'm at Seesaw, building for 25M+ students.
             </p>
           </div>
 
