@@ -3,11 +3,7 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 // Constants
 import { ANIMATION } from './constants/animation';
 
-// Hooks
-import { useScrollProgress } from './hooks/useScrollProgress';
-
 // Components (eager load)
-import { MorphingBackground } from './components/MorphingBackground';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Navigation } from './components/Navigation';
 import { HeroSectionWithPhoto } from './components/HeroSectionWithPhoto';
@@ -27,7 +23,6 @@ const Footer = lazy(() =>
 );
 
 export default function Portfolio() {
-  const scrollProgress = useScrollProgress();
   const [navVisible, setNavVisible] = useState(false);
 
   useEffect(() => {
@@ -41,17 +36,15 @@ export default function Portfolio() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen text-slate-100 bg-navy-dark">
+      <div className="min-h-screen bg-paper text-ink">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-teal-500 focus:text-slate-950 focus:rounded-lg z-50"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-accent focus:text-paper focus:rounded-lg z-50"
         >
           Skip to main content
         </a>
 
         <Navigation isVisible={navVisible} />
-
-        <MorphingBackground scrollProgress={scrollProgress} />
 
         <main id="main-content" className="relative z-10">
           <HeroSectionWithPhoto />

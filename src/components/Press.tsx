@@ -1,7 +1,6 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { SectionHeader } from './SectionHeader';
-import { FadeIn } from './FadeIn';
 import { Lightbox } from './Lightbox';
 import wiredMagazine from '../assets/images/photos/wired_magazine.png';
 import wiredLogo from '../assets/images/photos/wired_logo.png';
@@ -108,8 +107,7 @@ export function Press() {
           <SectionHeader>Press</SectionHeader>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {pressItems.map((item, index) => (
-              <FadeIn key={index} delay={index * 100}>
-                <div className="flex flex-col gap-2">
+              <div key={index} className="flex flex-col gap-2">
                   {item.url ? (
                     <a
                       href={item.url}
@@ -159,8 +157,7 @@ export function Press() {
                       loading="lazy"
                     />
                   </button>
-                </div>
-              </FadeIn>
+              </div>
             ))}
           </div>
         </div>

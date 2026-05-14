@@ -1,6 +1,4 @@
-import { FadeIn } from './FadeIn';
 import { personalInfo } from '../data/personalInfo';
-import { ANIMATION } from '../constants/animation';
 import xcloudAward from '../assets/images/photos/xcloud_award.jpg';
 
 export function HeroSectionWithPhoto() {
@@ -13,26 +11,18 @@ export function HeroSectionWithPhoto() {
               {personalInfo.name}
             </h1>
 
-            <FadeIn delay={ANIMATION.HERO_SUBTITLE_DELAY}>
-              <p className="text-xl sm:text-2xl md:text-3xl text-slate-400 leading-relaxed mb-4 sm:mb-6">
-                {personalInfo.title}
-              </p>
-            </FadeIn>
+            <p className="text-xl sm:text-2xl md:text-3xl text-slate-400 leading-relaxed mb-4 sm:mb-6">
+              {personalInfo.title}
+            </p>
 
-            <FadeIn delay={ANIMATION.HERO_DESCRIPTION_DELAY}>
-              <p className="text-base sm:text-lg text-slate-500 leading-relaxed">
-                Founding engineer on Xbox Cloud Gaming. Built and presented the prototype to Satya
-                Nadella that secured project funding. Now at Seesaw, building for 25M+ students
-                across 1 in 3 US elementary schools.
-              </p>
-            </FadeIn>
+            <p className="text-base sm:text-lg text-slate-500 leading-relaxed">
+              Founding engineer on Xbox Cloud Gaming. Built and presented the prototype to Satya
+              Nadella that secured project funding. Now at Seesaw, building for 25M+ students
+              across 1 in 3 US elementary schools.
+            </p>
           </div>
 
-          <FadeIn
-            delay={ANIMATION.HERO_DESCRIPTION_DELAY}
-            direction="left"
-            className="w-full lg:w-auto lg:flex-shrink-0"
-          >
+          <div className="w-full lg:w-auto lg:flex-shrink-0">
             <a
               href="https://www.tomsguide.com/us/best-of-e3-2019,review-6571.html"
               target="_blank"
@@ -46,7 +36,7 @@ export function HeroSectionWithPhoto() {
                 loading="lazy"
               />
             </a>
-          </FadeIn>
+          </div>
         </div>
       </div>
     </header>
