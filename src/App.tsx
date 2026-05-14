@@ -13,7 +13,7 @@ const Experience = lazy(() =>
   import('./components/v2/Experience').then((module) => ({ default: module.Experience }))
 );
 const Press = lazy(() =>
-  import('./components/Press').then((module) => ({ default: module.Press }))
+  import('./components/v2/Press').then((module) => ({ default: module.Press }))
 );
 const AboutSection = lazy(() =>
   import('./components/AboutSection').then((module) => ({ default: module.AboutSection }))
