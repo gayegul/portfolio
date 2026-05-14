@@ -63,8 +63,13 @@ describe('Portfolio App Integration', () => {
     // Wait for lazy-loaded components
     await waitFor(
       () => {
-        // Work section
-        expect(screen.getByText('Modernization & Design Systems')).toBeInTheDocument();
+        // Work section — chapter heading is split across spans for italic styling
+        const headings = screen.getAllByRole('heading');
+        expect(
+          headings.some((h) =>
+            /Modernization\s*&\s*design\s*systems/i.test(h.textContent ?? '')
+          )
+        ).toBe(true);
 
         // Press section (appears in nav and as heading)
         const pressElements = screen.getAllByText('Press');
@@ -87,10 +92,16 @@ describe('Portfolio App Integration', () => {
 
     await waitFor(
       () => {
-        expect(screen.getByText('Modernization & Design Systems')).toBeInTheDocument();
-        expect(screen.getByText('Internationalization')).toBeInTheDocument();
-        expect(screen.getByText('Xbox Cloud Gaming (xCloud)')).toBeInTheDocument();
-        expect(screen.getByText('Xbox Backwards Compatibility')).toBeInTheDocument();
+        // Chapter headings are split across spans for editorial italic styling,
+        // so check by combined textContent on each heading element.
+        const headings = screen.getAllByRole('heading');
+        const headingText = headings.map((h) => h.textContent ?? '');
+        expect(
+          headingText.some((t) => /Modernization\s*&\s*design\s*systems/i.test(t))
+        ).toBe(true);
+        expect(headingText.some((t) => /Internationalization/.test(t))).toBe(true);
+        expect(headingText.some((t) => /Xbox\s*Cloud\s*Gaming/i.test(t))).toBe(true);
+        expect(headingText.some((t) => /Backwards\s*Compatibility/i.test(t))).toBe(true);
       },
       { timeout: 3000 }
     );

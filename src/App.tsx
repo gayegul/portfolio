@@ -9,8 +9,8 @@ import { Navigation } from './components/Navigation';
 import { Hero } from './components/v2/Hero';
 
 // Components (lazy load)
-const ExperienceSection = lazy(() =>
-  import('./components/ExperienceSection').then((module) => ({ default: module.ExperienceSection }))
+const Experience = lazy(() =>
+  import('./components/v2/Experience').then((module) => ({ default: module.Experience }))
 );
 const Press = lazy(() =>
   import('./components/Press').then((module) => ({ default: module.Press }))
@@ -49,7 +49,7 @@ export default function Portfolio() {
         <main id="main-content" className="relative z-10">
           <Hero />
           <Suspense fallback={<div className="min-h-screen" />}>
-            <ExperienceSection />
+            <Experience />
             <Press />
             <AboutSection />
             <Footer />
