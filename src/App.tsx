@@ -15,8 +15,8 @@ const Experience = lazy(() =>
 const Press = lazy(() =>
   import('./components/v2/Press').then((module) => ({ default: module.Press }))
 );
-const AboutSection = lazy(() =>
-  import('./components/AboutSection').then((module) => ({ default: module.AboutSection }))
+const About = lazy(() =>
+  import('./components/v2/About').then((module) => ({ default: module.About }))
 );
 const Footer = lazy(() =>
   import('./components/Footer').then((module) => ({ default: module.Footer }))
@@ -51,7 +51,7 @@ export default function Portfolio() {
           <Suspense fallback={<div className="min-h-screen" />}>
             <Experience />
             <Press />
-            <AboutSection />
+            <About />
             <Footer />
           </Suspense>
         </main>

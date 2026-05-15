@@ -112,12 +112,15 @@ describe('Portfolio App Integration', () => {
 
     await waitFor(
       () => {
-        const mastersElements = screen.getAllByText("Master's");
-        expect(mastersElements.length).toBeGreaterThan(0);
-        const engineeringMgmt = screen.getAllByText('Engineering Management');
-        expect(engineeringMgmt.length).toBeGreaterThan(0);
-        const envEngElements = screen.getAllByText('Environmental Engineering');
-        expect(envEngElements.length).toBeGreaterThan(0);
+        // Education appears as numbered footnotes in About — the degree/field
+        // text is split across nodes inside <Footnote>, so match by combined
+        // textContent of the list items. Curly apostrophe is used in copy.
+        const fnItems = Array.from(document.querySelectorAll('li[id^="about-fn-"]'));
+        expect(fnItems.length).toBeGreaterThan(0);
+        const fnText = fnItems.map((li) => li.textContent ?? '').join(' | ');
+        expect(/Master(?:'|’)s/.test(fnText)).toBe(true);
+        expect(fnText).toMatch(/Engineering Management/);
+        expect(fnText).toMatch(/Environmental Engineering/);
       },
       { timeout: 3000 }
     );
