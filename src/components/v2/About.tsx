@@ -236,7 +236,7 @@ export function About() {
               </p>
 
               <p>
-                From there it was eight years at Microsoft —{' '}
+                From there it was six years at Microsoft —{' '}
                 Backwards Compatibility first, then Xbox Cloud Gaming as
                 one of the early engineers — and since 2023, Seesaw, where
                 I work on the platform that millions of K-12 students see
