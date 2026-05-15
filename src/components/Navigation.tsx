@@ -149,13 +149,13 @@ export function Navigation() {
             href="#top"
             onClick={handleMastheadClick}
             className="group inline-flex items-center font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-ink hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper transition-colors"
-            aria-label="Back to top — Field Notes title page"
+            aria-label="Field Notes / G. Bulut — back to top"
           >
-            <span>Field Notes</span>
+            <span aria-hidden="true">Field Notes</span>
             <span aria-hidden="true" className="mx-2 text-muted group-hover:text-accent transition-colors">
               /
             </span>
-            <span className="text-muted group-hover:text-accent transition-colors">G. Bulut</span>
+            <span aria-hidden="true" className="text-muted group-hover:text-accent transition-colors">G. Bulut</span>
           </a>
 
           {/* Desktop section links + folio */}
@@ -183,7 +183,7 @@ export function Navigation() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-mono text-xs uppercase tracking-[0.2em] text-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper transition-colors"
-                  aria-label="Open résumé PDF in a new tab"
+                  aria-label="Résumé (PDF) — opens in new tab"
                 >
                   Résumé
                   <span aria-hidden="true" className="ml-1 text-muted/70">↗</span>
@@ -258,7 +258,7 @@ export function Navigation() {
                   rel="noopener noreferrer"
                   onClick={handleSectionClick}
                   className="font-mono text-xl uppercase tracking-[0.16em] text-ink hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper transition-colors"
-                  aria-label="Open résumé PDF in a new tab"
+                  aria-label="Résumé (PDF) — opens in new tab"
                 >
                   Résumé
                   <span aria-hidden="true" className="ml-2 text-muted">↗</span>

@@ -2,6 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─────────────────────────────────────────────────────────────────────
+ * Self-hosted fonts — Newsreader (variable, latin) and JetBrains Mono.
+ * Eliminates the render-blocking <link> to fonts.googleapis.com that
+ * Lighthouse flagged as the LCP delay. Files in /public/fonts/, served
+ * same-origin so no DNS+TLS round-trip needed.
+ *
+ * Each face uses the same .woff2 served at variable weights — that's
+ * how Google Fonts shipped them; we just inline the @font-face block.
+ * `font-display: swap` matches the previous behavior.
+ * `unicode-range` keeps subsetting working — the browser only
+ *   downloads when a glyph in the range is actually rendered. We only
+ *   ship the latin subset (the body copy is English) so this is
+ *   currently a no-op, kept for forward-compat if another subset is
+ *   added later.
+ * ──────────────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/newsreader.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('/fonts/newsreader-italic.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -55,6 +95,6 @@ body {
 /* Visible focus indicators for keyboard navigation */
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid #C8463C;
+  outline: 2px solid #B23F37;
   outline-offset: 2px;
 }

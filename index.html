@@ -11,12 +11,22 @@
     <meta name="keywords" content="Gaye Bulut, Software Engineer, Xbox Cloud Gaming, Microsoft, Seesaw, React, TypeScript, Full Stack Developer" />
     <meta name="author" content="Gaye Bulut" />
 
-    <!-- Fonts: Newsreader (serif) + JetBrains Mono -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts: self-hosted, served from /public/fonts. No external CSS
+         round-trip; the Hero LCP font is preloaded so it arrives in
+         parallel with the JS bundle instead of after first paint. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/newsreader.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/jetbrains-mono.woff2"
+      crossorigin
     />
 
     <!-- Open Graph / Facebook -->

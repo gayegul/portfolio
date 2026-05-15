@@ -10,7 +10,7 @@ export default {
         // Field Notes palette
         paper: '#F5F1E8',
         ink: '#1A1A1A',
-        accent: '#C8463C',
+        accent: '#B23F37',
         highlight: '#FFE15C',
         muted: '#6B6B6B',
       },

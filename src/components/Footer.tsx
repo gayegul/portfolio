@@ -80,7 +80,7 @@ export function Footer() {
               <p className="text-muted">
                 Paper <span className="tabular-nums">#F5F1E8</span>. Ink{' '}
                 <span className="tabular-nums">#1A1A1A</span>. Margin red{' '}
-                <span className="text-accent tabular-nums">#C8463C</span>.
+                <span className="text-accent tabular-nums">#B23F37</span>.
               </p>
             </div>
           </section>
@@ -98,7 +98,7 @@ export function Footer() {
                 <a
                   href={`mailto:${personalInfo.email}`}
                   className="inline-flex items-baseline gap-2 text-ink hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper transition-colors"
-                  aria-label={`Email ${personalInfo.email}`}
+                  aria-label={`${personalInfo.email} — send email`}
                 >
                   <span className="text-muted">→</span>
                   <span>{personalInfo.email}</span>
@@ -110,7 +110,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-baseline gap-2 text-ink hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper transition-colors"
-                  aria-label="LinkedIn profile (opens in new tab)"
+                  aria-label="linkedin.com/in/gayebulut — LinkedIn profile (opens in new tab)"
                 >
                   <span className="text-muted">→</span>
                   <span>linkedin.com/in/gayebulut</span>
@@ -123,7 +123,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-baseline gap-2 text-ink hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper transition-colors"
-                  aria-label="GitHub profile (opens in new tab)"
+                  aria-label="github.com/gayebulut — GitHub profile (opens in new tab)"
                 >
                   <span className="text-muted">→</span>
                   <span>github.com/gayebulut</span>
@@ -136,7 +136,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-baseline gap-2 text-ink hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper transition-colors"
-                  aria-label="Open résumé PDF in a new tab"
+                  aria-label="Résumé (PDF) — opens in new tab"
                 >
                   <span className="text-muted">→</span>
                   <span>résumé (PDF)</span>
