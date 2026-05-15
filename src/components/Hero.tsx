@@ -1,4 +1,4 @@
-import { personalInfo } from '../../data/personalInfo';
+import { personalInfo } from '../data/personalInfo';
 
 /**
  * Hero — Field Notes title page.

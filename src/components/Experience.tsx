@@ -1,5 +1,5 @@
-import xcloudAward from '../../assets/images/photos/xcloud_award.jpg';
-import seesawLogo from '../../assets/images/logos/seesawlogo.png';
+import xcloudAward from '../assets/images/photos/xcloud_award.jpg';
+import seesawLogo from '../assets/images/logos/seesawlogo.png';
 import { Chapter, Marginalia } from './Chapter';
 import { CountUp } from './CountUp';
 

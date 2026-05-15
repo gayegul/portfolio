@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
 /**
  * CountUp — the single intentional bit of motion in the v2 design.

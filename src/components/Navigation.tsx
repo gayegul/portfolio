@@ -1,267 +1,286 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Github, Linkedin, Mail } from 'lucide-react';
-import { personalInfo } from '../data/personalInfo';
+import { useCallback, useEffect, useState } from 'react';
 
-interface NavigationProps {
-  isVisible: boolean;
+/**
+ * Navigation — Field Notes running head.
+ *
+ * Sits at the top of every page like the head of a printed sheet: a hairline
+ * rule, a masthead pill on the left, mono section labels on the right, and a
+ * page-folio (pp. NNN) on the far right that updates with the section
+ * currently in view. No blur, no glass, no shadow — solid paper and ink.
+ *
+ * Behavior:
+ *  - Sticky, slim (`py-3 sm:py-4`).
+ *  - Scrollspy with IntersectionObserver — the section that crosses ~30% of
+ *    the viewport from the top is the active one. Inline implementation
+ *    because `useIntersectionObserver` disconnects on first fire (used by
+ *    the 25M counter, not appropriate for ongoing tracking).
+ *  - Active section: `text-accent` + `aria-current="location"`.
+ *  - Mobile (<768px): mono "menu"/"close" word in accent-red opens a full-
+ *    paper drawer with stacked links at oversized mono. No slide animation.
+ *  - "Education" link is gone — Education is now numbered footnotes inside
+ *    About, so a separate nav target would point at a non-anchor.
+ */
+
+type SectionKey = 'top' | 'work' | 'press' | 'about';
+
+interface SectionLink {
+  key: SectionKey;
+  href: string;
+  label: string;
+  /** Page-folio number shown on the far right when this section is active. */
+  folio: string;
 }
 
-export function Navigation({ isVisible }: NavigationProps) {
+const SECTION_LINKS: ReadonlyArray<SectionLink> = [
+  { key: 'work', href: '#work', label: 'Work', folio: 'pp. 002' },
+  { key: 'press', href: '#press', label: 'Press', folio: 'pp. 003' },
+  { key: 'about', href: '#about', label: 'About', folio: 'pp. 004' },
+];
+
+const TITLE_FOLIO = 'pp. 001';
+
+export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [emailCopied, setEmailCopied] = useState(false);
+  const [activeSection, setActiveSection] = useState<SectionKey>('top');
 
+  // Close mobile menu on Escape.
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 640);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  // Handle Escape key to close mobile menu
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && mobileMenuOpen) {
-        setMobileMenuOpen(false);
-      }
+    if (!mobileMenuOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
     };
-
-    window.addEventListener('keydown', handleEsc);
-    return () => window.removeEventListener('keydown', handleEsc);
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
   }, [mobileMenuOpen]);
 
-  const copyEmailToClipboard = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(personalInfo.email);
-      setEmailCopied(true);
-      setTimeout(() => setEmailCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy email:', err);
+  // Lock body scroll while drawer is open so the page underneath doesn't
+  // scroll behind the menu on iOS.
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [mobileMenuOpen]);
+
+  // Scrollspy — observe each section element. The section whose top crosses
+  // the upper third of the viewport wins. If nothing is intersecting (we're
+  // at the very top of the page), fall back to `top`.
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof IntersectionObserver === 'undefined') {
+      return;
     }
+
+    const ids: SectionKey[] = ['top', 'work', 'press', 'about'];
+    const elements = ids
+      .map((id) => ({ id, el: document.getElementById(id) }))
+      .filter((entry): entry is { id: SectionKey; el: HTMLElement } => entry.el !== null);
+
+    if (elements.length === 0) return;
+
+    // Track current intersection ratio per section so we can pick the most
+    // visible one as the observer fires.
+    const ratios = new Map<SectionKey, number>();
+    elements.forEach(({ id }) => ratios.set(id, 0));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const id = entry.target.id as SectionKey;
+          ratios.set(id, entry.isIntersecting ? entry.intersectionRatio : 0);
+        }
+
+        // Pick the section with the highest visible ratio. If everything
+        // is at 0, leave the previous active section in place — this avoids
+        // a flash of "top" while scrolling between two adjacent sections.
+        let best: { id: SectionKey; ratio: number } | null = null;
+        for (const [id, ratio] of ratios) {
+          if (ratio > 0 && (!best || ratio > best.ratio)) {
+            best = { id, ratio };
+          }
+        }
+
+        if (best) {
+          setActiveSection(best.id);
+        } else if (window.scrollY < 100) {
+          // Treat the very top of the page as the title page.
+          setActiveSection('top');
+        }
+      },
+      {
+        // Trigger when ~30% of a section is in view from the top.
+        rootMargin: '-30% 0px -55% 0px',
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
+    );
+
+    elements.forEach(({ el }) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
-  const scrollToTop = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleMastheadClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    window.history.pushState('', document.title, window.location.pathname + window.location.search);
+    if (window.history?.pushState) {
+      window.history.pushState('', document.title, window.location.pathname + window.location.search);
+    }
+    setActiveSection('top');
   }, []);
+
+  const handleSectionClick = useCallback(() => {
+    setMobileMenuOpen(false);
+  }, []);
+
+  const currentFolio =
+    activeSection === 'top'
+      ? TITLE_FOLIO
+      : SECTION_LINKS.find((l) => l.key === activeSection)?.folio ?? TITLE_FOLIO;
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 transition-all duration-300"
-      aria-label="Main navigation"
-      style={{
-        zIndex: 40,
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
-        pointerEvents: isVisible ? 'auto' : 'none',
-      }}
+      aria-label="Section navigation"
+      className="sticky top-0 z-40 bg-paper border-b border-ink/10"
     >
-      <div className="border-b border-nav-border bg-nav-bg backdrop-blur-xl px-4 sm:px-6 xl:px-8">
-        <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto py-4 flex items-center justify-between">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 py-3 sm:py-4">
+        <div className="flex items-center justify-between gap-4">
+          {/* Masthead pill — echoes Hero's masthead. Clicks to top. */}
           <a
-            href="#"
-            onClick={scrollToTop}
-            className="text-base font-semibold text-slate-100 hover:text-teal-400 transition-colors"
+            href="#top"
+            onClick={handleMastheadClick}
+            className="group inline-flex items-center font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-ink hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper transition-colors"
+            aria-label="Back to top — Field Notes title page"
           >
-            {personalInfo.name}
+            <span>Field Notes</span>
+            <span aria-hidden="true" className="mx-2 text-muted group-hover:text-accent transition-colors">
+              /
+            </span>
+            <span className="text-muted group-hover:text-accent transition-colors">G. Bulut</span>
           </a>
 
-          {/* Desktop nav */}
-          {!isMobile && (
-            <div className="flex items-center gap-6">
-              <a
-                href="#work"
-                className="text-sm text-slate-400 hover:text-slate-100 transition-colors"
-              >
-                Work
-              </a>
-
-              <a
-                href="#press"
-                className="text-sm text-slate-400 hover:text-slate-100 transition-colors"
-              >
-                Press
-              </a>
-
-              <a
-                href="#about"
-                className="text-sm text-slate-400 hover:text-slate-100 transition-colors"
-              >
-                About
-              </a>
-
-              <a
-                href="#education"
-                className="text-sm text-slate-400 hover:text-slate-100 transition-colors"
-              >
-                Education
-              </a>
-
-              <a
-                href="/Gaye_Bulut_Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-slate-400 hover:text-teal-400 transition-colors"
-                aria-label="View resume"
-              >
-                Resume
-              </a>
-
-              <a
-                href={personalInfo.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
-                aria-label="LinkedIn profile"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-
-              <a
-                href={personalInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
-                aria-label="GitHub profile"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-
-              <button
-                onClick={copyEmailToClipboard}
-                className="relative text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
-                title={emailCopied ? 'Email copied!' : 'Copy email to clipboard'}
-                aria-label={emailCopied ? 'Email copied!' : 'Copy email to clipboard'}
-              >
-                <Mail className="w-5 h-5" />
-                {emailCopied && (
-                  <span
-                    role="status"
-                    aria-live="polite"
-                    className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-teal-400 whitespace-nowrap"
-                  >
-                    Copied!
-                  </span>
-                )}
-              </button>
-            </div>
-          )}
-
-          {/* Mobile menu button */}
-          {isMobile && (
-            <button
-              className="p-2 text-slate-400 hover:text-slate-100 transition-colors"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-              aria-expanded={mobileMenuOpen}
-            >
-              {mobileMenuOpen ? (
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              ) : (
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              )}
-            </button>
-          )}
-        </div>
-
-        {/* Mobile menu dropdown */}
-        {isMobile && mobileMenuOpen && (
-          <div className="border-t border-slate-800">
-            <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto py-4 space-y-4">
-              <a
-                href="#work"
-                className="block text-slate-300 hover:text-teal-400 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Work
-              </a>
-              <a
-                href="#press"
-                className="block text-slate-300 hover:text-teal-400 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Press
-              </a>
-              <a
-                href="#about"
-                className="block text-slate-300 hover:text-teal-400 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                About
-              </a>
-              <a
-                href="#education"
-                className="block text-slate-300 hover:text-teal-400 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Education
-              </a>
-              <a
-                href="/Gaye_Bulut_Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-slate-300 hover:text-teal-400 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-                aria-label="View resume"
-              >
-                Resume
-              </a>
-              <div className="flex items-center gap-4 pt-2">
-                <a
-                  href={personalInfo.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
-                  aria-label="LinkedIn profile"
-                >
-                  <Linkedin className="w-5 h-5" />
-                </a>
-                <a
-                  href={personalInfo.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
-                  aria-label="GitHub profile"
-                >
-                  <Github className="w-5 h-5" />
-                </a>
-                <button
-                  onClick={copyEmailToClipboard}
-                  className="relative text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
-                  title={emailCopied ? 'Email copied!' : 'Copy email to clipboard'}
-                  aria-label={emailCopied ? 'Email copied!' : 'Copy email to clipboard'}
-                >
-                  <Mail className="w-5 h-5" />
-                  {emailCopied && (
-                    <span
-                      role="status"
-                      aria-live="polite"
-                      className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-teal-400 whitespace-nowrap"
+          {/* Desktop section links + folio */}
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
+            <ul className="flex items-center gap-6 lg:gap-8" role="list">
+              {SECTION_LINKS.map(({ key, href, label }) => {
+                const isActive = activeSection === key;
+                return (
+                  <li key={key}>
+                    <a
+                      href={href}
+                      aria-current={isActive ? 'location' : undefined}
+                      className={`font-mono text-xs uppercase tracking-[0.2em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper transition-colors ${
+                        isActive ? 'text-accent' : 'text-muted hover:text-ink'
+                      }`}
                     >
-                      Copied!
-                    </span>
-                  )}
-                </button>
-              </div>
-            </div>
+                      {label}
+                    </a>
+                  </li>
+                );
+              })}
+              <li>
+                <a
+                  href="/Gaye_Bulut_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-xs uppercase tracking-[0.2em] text-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper transition-colors"
+                  aria-label="Open résumé PDF in a new tab"
+                >
+                  Résumé
+                  <span aria-hidden="true" className="ml-1 text-muted/70">↗</span>
+                </a>
+              </li>
+            </ul>
+
+            {/* Page-folio — updates with the section in view */}
+            <span
+              aria-hidden="true"
+              className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted tabular-nums pl-6 lg:pl-8 border-l border-ink/10"
+            >
+              {currentFolio}
+            </span>
           </div>
-        )}
+
+          {/* Mobile toggle — mono word in accent-red, not an icon */}
+          <button
+            type="button"
+            className="md:hidden font-mono text-xs uppercase tracking-[0.2em] text-accent hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper transition-colors"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-section-menu"
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+          >
+            {mobileMenuOpen ? 'close' : 'menu'}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile drawer — full paper, links stacked left-aligned in oversized
+          mono. No slide animation; show/hide instantly. Rendered inline so
+          it sits flush below the running-head rule without needing fixed
+          offsets that drift across breakpoints. */}
+      {mobileMenuOpen && (
+        <div
+          id="mobile-section-menu"
+          className="md:hidden bg-paper border-t border-ink/10"
+        >
+          <div className="px-4 sm:px-6 pt-10 pb-12 max-h-[calc(100vh-4rem)] overflow-y-auto">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent mb-8">
+              <span aria-hidden="true">§ </span>
+              Contents
+            </p>
+            <ul className="flex flex-col gap-6" role="list">
+              {SECTION_LINKS.map(({ key, href, label, folio }) => {
+                const isActive = activeSection === key;
+                return (
+                  <li key={key} className="flex items-baseline justify-between gap-4">
+                    <a
+                      href={href}
+                      onClick={handleSectionClick}
+                      aria-current={isActive ? 'location' : undefined}
+                      className={`font-mono text-xl uppercase tracking-[0.16em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper transition-colors ${
+                        isActive ? 'text-accent' : 'text-ink hover:text-accent'
+                      }`}
+                    >
+                      {label}
+                    </a>
+                    <span
+                      aria-hidden="true"
+                      className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted tabular-nums"
+                    >
+                      {folio}
+                    </span>
+                  </li>
+                );
+              })}
+              <li className="flex items-baseline justify-between gap-4 pt-2 border-t border-ink/10">
+                <a
+                  href="/Gaye_Bulut_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleSectionClick}
+                  className="font-mono text-xl uppercase tracking-[0.16em] text-ink hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper transition-colors"
+                  aria-label="Open résumé PDF in a new tab"
+                >
+                  Résumé
+                  <span aria-hidden="true" className="ml-2 text-muted">↗</span>
+                </a>
+                <span
+                  aria-hidden="true"
+                  className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted"
+                >
+                  PDF
+                </span>
+              </li>
+            </ul>
+
+            <p className="mt-12 font-mono text-xs text-muted leading-relaxed max-w-xs">
+              <span className="text-ink">ed. note —</span>{' '}
+              tap a section to jump. Esc closes this list.
+            </p>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
+
+export default Navigation;

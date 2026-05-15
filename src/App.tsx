@@ -2,21 +2,21 @@ import { lazy, Suspense } from 'react';
 
 // Components (eager load)
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { Navigation } from './components/v2/Navigation';
-import { Hero } from './components/v2/Hero';
+import { Navigation } from './components/Navigation';
+import { Hero } from './components/Hero';
 
 // Components (lazy load)
 const Experience = lazy(() =>
-  import('./components/v2/Experience').then((module) => ({ default: module.Experience }))
+  import('./components/Experience').then((module) => ({ default: module.Experience }))
 );
 const Press = lazy(() =>
-  import('./components/v2/Press').then((module) => ({ default: module.Press }))
+  import('./components/Press').then((module) => ({ default: module.Press }))
 );
 const About = lazy(() =>
-  import('./components/v2/About').then((module) => ({ default: module.About }))
+  import('./components/About').then((module) => ({ default: module.About }))
 );
 const Footer = lazy(() =>
-  import('./components/v2/Footer').then((module) => ({ default: module.Footer }))
+  import('./components/Footer').then((module) => ({ default: module.Footer }))
 );
 
 export default function Portfolio() {
