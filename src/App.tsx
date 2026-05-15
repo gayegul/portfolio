@@ -1,11 +1,8 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
-
-// Constants
-import { ANIMATION } from './constants/animation';
+import { lazy, Suspense } from 'react';
 
 // Components (eager load)
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { Navigation } from './components/Navigation';
+import { Navigation } from './components/v2/Navigation';
 import { Hero } from './components/v2/Hero';
 
 // Components (lazy load)
@@ -19,21 +16,10 @@ const About = lazy(() =>
   import('./components/v2/About').then((module) => ({ default: module.About }))
 );
 const Footer = lazy(() =>
-  import('./components/Footer').then((module) => ({ default: module.Footer }))
+  import('./components/v2/Footer').then((module) => ({ default: module.Footer }))
 );
 
 export default function Portfolio() {
-  const [navVisible, setNavVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setNavVisible(window.scrollY > ANIMATION.NAV_SCROLL_THRESHOLD);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <ErrorBoundary>
       <div className="min-h-screen bg-paper text-ink">
@@ -44,7 +30,7 @@ export default function Portfolio() {
           Skip to main content
         </a>
 
-        <Navigation isVisible={navVisible} />
+        <Navigation />
 
         <main id="main-content" className="relative z-10">
           <Hero />

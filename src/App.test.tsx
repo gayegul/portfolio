@@ -79,9 +79,10 @@ describe('Portfolio App Integration', () => {
         const aboutElements = screen.getAllByText('About');
         expect(aboutElements.length).toBeGreaterThan(0);
 
-        // Education (appears in nav and as heading)
-        const educationElements = screen.getAllByText('Education');
-        expect(educationElements.length).toBeGreaterThan(0);
+        // Education is no longer a top-level section — it lives as numbered
+        // footnotes inside About. Verify by id rather than nav label.
+        const educationFootnotes = document.querySelectorAll('li[id^="about-fn-"]');
+        expect(educationFootnotes.length).toBeGreaterThan(0);
       },
       { timeout: 3000 }
     );
