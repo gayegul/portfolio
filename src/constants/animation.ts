@@ -1,20 +1,13 @@
-export const ANIMATION = {
-  STAGGER_DELAY: 150,
-  HERO_SUBTITLE_DELAY: 500,
-  HERO_DESCRIPTION_DELAY: 700,
-  FADE_DURATION: 700,
-  TRANSITION_DURATION: 300,
-  NAV_SCROLL_THRESHOLD: 100,
-} as const;
-
+/**
+ * IntersectionObserver defaults shared by hooks that need to fire on
+ * scroll-into-view (currently the CountUp component in v2). Threshold and
+ * root margin are tuned so the trigger fires when the element is a touch
+ * inside the viewport from the bottom, not the instant its edge crosses 0px.
+ *
+ * All other timing constants were retired in the v2 "Field Notes" redesign,
+ * which deliberately uses almost no motion.
+ */
 export const INTERSECTION = {
   THRESHOLD: 0.1,
   ROOT_MARGIN: '0px 0px -50px 0px',
-} as const;
-
-export const LAYOUT = {
-  SECTION_SCROLL_MARGIN: '5rem',
-  PRESS_IMAGE_HEIGHT: 'h-56',
-  HERO_IMAGE_MAX_WIDTH_MOBILE: 'max-w-[220px]',
-  HERO_IMAGE_MAX_WIDTH_DESKTOP: 'lg:max-w-[280px]',
 } as const;

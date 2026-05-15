@@ -1,6 +1,7 @@
 import xcloudAward from '../../assets/images/photos/xcloud_award.jpg';
 import seesawLogo from '../../assets/images/logos/seesawlogo.png';
 import { Chapter, Marginalia } from './Chapter';
+import { CountUp } from './CountUp';
 
 /**
  * Experience — Section Nº 02. "Work."
@@ -114,7 +115,7 @@ export function Experience() {
                     44 – 48% faster page loads
                   </span>
                 </span>{' '}
-                across the product, for 25M+ students.
+                across the product, for <CountUp to={25} suffix="M+" /> students.
               </p>
             </div>
           </Chapter>
