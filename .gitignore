@@ -32,3 +32,9 @@ yarn-error.log*
 *.tmp
 *.temp
 .cache/
+
+# Vercel
+.vercel/
+
+# Playwright MCP artifacts
+.playwright-mcp/

@@ -1,5 +1,4 @@
 import React from 'react';
-import { FadeIn } from './FadeIn';
 
 interface SectionHeaderProps {
   children: React.ReactNode;
@@ -7,10 +6,6 @@ interface SectionHeaderProps {
 
 export function SectionHeader({ children }: SectionHeaderProps) {
   return (
-    <FadeIn>
-      <h2 className="text-sm sm:text-base font-semibold tracking-wider uppercase text-slate-400 mb-8 sm:mb-12">
-        {children}
-      </h2>
-    </FadeIn>
+    <h2 className="font-mono text-xs sm:text-sm uppercase tracking-[0.3em] text-ink">{children}</h2>
   );
 }

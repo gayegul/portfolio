@@ -1,5 +1,4 @@
 import { SectionHeader } from './SectionHeader';
-import { FadeIn } from './FadeIn';
 import { EducationCard } from './EducationCard';
 import { education } from '../data/education';
 
@@ -7,28 +6,27 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className="py-8 sm:py-12 px-4 sm:px-6 xl:px-8 scroll-mt-nav"
+      className="scroll-mt-nav border-t border-line pt-12 lg:pt-16"
       aria-label="About and education"
     >
-      <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
-        <SectionHeader>About</SectionHeader>
-        <div className="mb-12 sm:mb-16">
-          <FadeIn>
-            <p className="text-lg sm:text-xl text-slate-300 leading-relaxed">
-              Three degrees in engineering, then a pivot to software as an apprentice at Microsoft.
-              Now, I own things end-to-end: specs, architecture, implementation, tests, deployment.
-              I like solving problems, building, and shipping fast.
+      <div className="container-spec pb-12 lg:pb-16">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-6">
+            <SectionHeader>About</SectionHeader>
+            <p className="mt-6 max-w-xl font-sans text-lg leading-relaxed text-ink-muted sm:mt-8 sm:text-xl">
+              Three degrees in engineering, then a pivot to software through a Microsoft
+              apprenticeship. I&apos;ve owned things end-to-end ever since: specs, architecture,
+              code, tests, deploys.
             </p>
-          </FadeIn>
-        </div>
+          </div>
 
-        {/* Education Section */}
-        <div id="education" className="scroll-mt-nav">
-          <SectionHeader>Education</SectionHeader>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {education.map((edu, index) => (
-              <EducationCard key={index} edu={edu} index={index} />
-            ))}
+          <div id="education" className="scroll-mt-nav lg:col-span-6">
+            <SectionHeader>Education</SectionHeader>
+            <div className="mt-6 sm:mt-8">
+              {education.map((edu) => (
+                <EducationCard key={`${edu.degree}-${edu.field}`} edu={edu} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

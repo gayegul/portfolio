@@ -1,53 +1,71 @@
-import { FadeIn } from './FadeIn';
+import { CountUp } from './CountUp';
 import { personalInfo } from '../data/personalInfo';
-import { ANIMATION } from '../constants/animation';
 import xcloudAward from '../assets/images/photos/xcloud_award.jpg';
+
+const METRICS = [
+  { target: 150000, suffix: '+', label: 'Servers managed' },
+  { target: 25, suffix: 'M+', label: 'Users reached' },
+  { target: 30, suffix: '+', label: 'Languages shipped' },
+  { target: 10, suffix: '', label: 'Years shipping' },
+];
 
 export function HeroSectionWithPhoto() {
   return (
-    <header className="min-h-[30vh] lg:min-h-[60vh] flex items-center pt-16 sm:pt-20 px-4 sm:px-6 xl:px-8 pb-4 lg:pb-0">
-      <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto w-full">
-        <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-12 xl:gap-16">
-          <div className="flex-1 w-full lg:max-w-2xl xl:max-w-3xl">
-            <h1 className="text-4xl sm:text-6xl md:text-8xl xl:text-9xl font-bold tracking-tight text-slate-100 mb-3 sm:mb-4">
-              {personalInfo.name}
+    <header className="pt-14 sm:pt-16 lg:pt-20">
+      <div className="container-spec">
+        <div className="flex flex-col gap-8 pb-8 sm:pb-10 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
+          <div className="max-w-3xl">
+            <h1 className="rise rise-1 font-display font-extrabold uppercase leading-[0.9] text-ink text-[clamp(2.75rem,7vw,6rem)]">
+              Gaye <span className="block">Bulut</span>
             </h1>
 
-            <FadeIn delay={ANIMATION.HERO_SUBTITLE_DELAY}>
-              <p className="text-xl sm:text-2xl md:text-3xl text-slate-400 leading-relaxed mb-4 sm:mb-6">
-                {personalInfo.title}
-              </p>
-            </FadeIn>
+            <p className="rise rise-2 mt-4 font-mono text-xs sm:text-sm uppercase tracking-[0.3em] text-accent">
+              {personalInfo.title}
+            </p>
 
-            <FadeIn delay={ANIMATION.HERO_DESCRIPTION_DELAY}>
-              <p className="text-base sm:text-lg text-slate-500 leading-relaxed">
-                Founding engineer on Xbox Cloud Gaming. Built and presented the prototype to Satya
-                Nadella that secured project funding. Now at Seesaw, building for 25M+ students
-                across 1 in 3 US elementary schools.
-              </p>
-            </FadeIn>
+            <p className="rise rise-3 mt-4 max-w-xl font-sans text-base sm:text-lg leading-relaxed text-ink-muted">
+              Founding engineer on Xbox Cloud Gaming. Built and presented the prototype to Satya
+              Nadella that secured project funding. Now at Seesaw, building for 25M+ students across
+              1 in 3 US elementary schools.
+            </p>
           </div>
 
-          <FadeIn
-            delay={ANIMATION.HERO_DESCRIPTION_DELAY}
-            direction="left"
-            className="w-full lg:w-auto lg:flex-shrink-0"
+          <a
+            href="https://www.tomsguide.com/us/best-of-e3-2019,review-6571.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rise rise-4 group block w-full max-w-[260px] border border-line transition-colors hover:border-accent focus-visible:border-accent lg:w-[280px] lg:max-w-none xl:w-[320px] lg:flex-shrink-0"
           >
-            <a
-              href="https://www.tomsguide.com/us/best-of-e3-2019,review-6571.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block max-w-[220px] mx-auto lg:mx-0 lg:max-w-[280px] xl:max-w-[340px] rounded-2xl overflow-hidden border-2 border-slate-800 hover:border-teal-400 transition-all shadow-photo"
-            >
-              <img
-                src={xcloudAward}
-                alt="xCloud award recognition"
-                className="w-full h-auto object-contain"
-                loading="lazy"
-              />
-            </a>
-          </FadeIn>
+            <img
+              src={xcloudAward}
+              alt="Gaye Bulut at the xCloud booth receiving E3 2019 award recognition"
+              className="block aspect-square w-full object-cover"
+              loading="lazy"
+            />
+            <span className="flex items-center justify-between gap-2 border-t border-line px-3 py-2.5 font-mono text-[10px] uppercase tracking-[0.15em] text-ink-faint transition-colors group-hover:text-accent">
+              <span>Fig. 01 — E3 2019</span>
+              <span>Best of show ↗</span>
+            </span>
+          </a>
         </div>
+
+        {/* Metric strip */}
+        <dl className="rise rise-5 grid grid-cols-2 gap-px border-y border-line bg-line lg:grid-cols-4">
+          {METRICS.map((metric) => (
+            <div
+              key={metric.label}
+              className="flex flex-col-reverse bg-ground py-5 pr-4 sm:py-6 [&:nth-child(even)]:pl-5 sm:[&:nth-child(even)]:pl-8 lg:[&:not(:first-child)]:pl-8"
+            >
+              <dt className="mt-2 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-ink-faint">
+                {metric.label}
+              </dt>
+              <dd className="font-display font-bold text-4xl sm:text-5xl xl:text-6xl leading-none text-ink">
+                <CountUp target={metric.target} />
+                {metric.suffix}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </header>
   );

@@ -1,20 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import App from './App';
 
 describe('Portfolio App Integration', () => {
   beforeEach(() => {
-    // Mock IntersectionObserver
-    global.IntersectionObserver = vi.fn(() => ({
-      observe: vi.fn(),
-      disconnect: vi.fn(),
-      unobserve: vi.fn(),
-      root: null,
-      rootMargin: '',
-      thresholds: [],
-      takeRecords: () => [],
-    })) as unknown as typeof IntersectionObserver;
-
     // Reset window scroll
     window.scrollY = 0;
   });

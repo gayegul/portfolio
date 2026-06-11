@@ -7,20 +7,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        'navy-dark': '#020617',
-        'slate-card': 'rgba(15, 23, 42, 0.5)',
-        'slate-border': 'rgb(30, 41, 59)',
-        'nav-bg': 'rgba(2, 6, 23, 0.8)',
-        'nav-border': 'rgba(30, 41, 59, 0.5)',
+        'ground': '#101211',
+        'ink': '#E6EAE7',
+        'ink-muted': '#99A39D',
+        'ink-faint': '#79847D',
+        'line': '#232826',
+        'line-strong': '#353B38',
+        'accent': '#2DD4BF',
+      },
+      fontFamily: {
+        display: ['"Big Shoulders Display Variable"', 'Impact', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
+        sans: ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
       },
       scrollMargin: {
         'nav': '5rem',
-      },
-      fontVariantNumeric: {
-        'tabular': 'tabular-nums',
-      },
-      boxShadow: {
-        'photo': '0 4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(20, 184, 166, 0.1)',
       },
     },
   },

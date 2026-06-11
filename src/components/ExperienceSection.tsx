@@ -4,18 +4,14 @@ import { projects } from '../data/projects';
 
 export function ExperienceSection() {
   return (
-    <section
-      id="work"
-      className="py-4 lg:py-16 px-4 sm:px-6 xl:px-8 scroll-mt-nav"
-      aria-label="Work experience"
-    >
-      <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
+    <section id="work" className="scroll-mt-nav pt-12 lg:pt-16" aria-label="Work experience">
+      <div className="container-spec pb-6 sm:pb-8">
         <SectionHeader>Work</SectionHeader>
-        <div className="grid gap-4 sm:gap-6">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.name} project={project} index={index} />
-          ))}
-        </div>
+      </div>
+      <div>
+        {projects.map((project, index) => (
+          <ProjectCard key={project.name} project={project} index={index} />
+        ))}
       </div>
     </section>
   );

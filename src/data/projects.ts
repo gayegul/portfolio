@@ -9,22 +9,31 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    name: 'Modernization & Design Systems',
+    name: 'User Onboarding & Activation',
     company: 'Seesaw',
     companyUrl: 'https://web.seesaw.me',
-    period: '2023 – Present',
+    period: '2025 – Present',
     description:
-      'Rebuilt 2 of 4 core platform libraries from Angular/Jinja to React + TypeScript. Created a shared component library adopted platform-wide. Led the company rebrand: new design system, color palette, and typography across all libraries.',
-    impact: '44-48% faster page loads, 25M+ users',
+      'Built a new user onboarding and activation experience end to end. Teachers set up a personalized account with their school, class, subjects, and interests, then land on a control-center homepage that walks them through real workflows: assigning their first activity, reviewing student responses, customizing their shortcuts. Every step shipped behind an A/B test.',
+    impact: '77% increase in user retention',
   },
   {
     name: 'Internationalization',
     company: 'Seesaw',
     companyUrl: 'https://web.seesaw.me',
-    period: '2023 – Present',
+    period: '2024 – 2025',
     description:
       'Added i18n and RTL support across a mixed codebase (Jinja, Angular, React, React Native). Full bidirectional support for Arabic, Hebrew, and 30+ languages. Built admin features for K-12 standards so districts can track student progress against state benchmarks.',
-    impact: '30+ languages, 130+ countries',
+    impact: '30+ languages, RTL included',
+  },
+  {
+    name: 'Modernization & Design Systems',
+    company: 'Seesaw',
+    companyUrl: 'https://web.seesaw.me',
+    period: '2023 – 2024',
+    description:
+      'Rebuilt 2 of 4 core platform libraries from Angular/Jinja to React + TypeScript. Created a shared component library adopted platform-wide. Led the company rebrand: new design system, color palette, and typography across all libraries.',
+    impact: '44-48% faster page loads, 25M+ users',
   },
   {
     name: 'Xbox Cloud Gaming (xCloud)',

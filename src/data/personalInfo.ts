@@ -10,6 +10,6 @@ export const personalInfo: PersonalInfo = {
   name: 'Gaye Bulut',
   title: 'Senior Software Engineer',
   email: 'gayegul@gmail.com',
-  github: 'https://github.com/gayebulut?tab=overview&from=2025-12-01&to=2025-12-24',
+  github: 'https://github.com/gayebulut',
   linkedin: 'https://www.linkedin.com/in/gayebulut/',
 };

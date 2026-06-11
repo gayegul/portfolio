@@ -6,6 +6,13 @@ interface NavigationProps {
   isVisible: boolean;
 }
 
+const NAV_LINKS = [
+  { href: '#work', label: 'Work' },
+  { href: '#press', label: 'Press' },
+  { href: '#about', label: 'About' },
+  { href: '#education', label: 'Education' },
+];
+
 export function Navigation({ isVisible }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -57,89 +64,74 @@ export function Navigation({ isVisible }: NavigationProps) {
         pointerEvents: isVisible ? 'auto' : 'none',
       }}
     >
-      <div className="border-b border-nav-border bg-nav-bg backdrop-blur-xl px-4 sm:px-6 xl:px-8">
-        <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto py-4 flex items-center justify-between">
+      <div className="border-b border-line bg-ground/95">
+        <div className="container-spec flex items-center justify-between py-4">
           <a
             href="#"
             onClick={scrollToTop}
-            className="text-base font-semibold text-slate-100 hover:text-teal-400 transition-colors"
+            className="flex items-center gap-2.5 font-mono text-xs uppercase tracking-[0.2em] text-ink transition-colors hover:text-accent"
           >
+            <span className="inline-block h-2 w-2 bg-accent" aria-hidden="true" />
             {personalInfo.name}
           </a>
 
           {/* Desktop nav */}
           {!isMobile && (
             <div className="flex items-center gap-6">
-              <a
-                href="#work"
-                className="text-sm text-slate-400 hover:text-slate-100 transition-colors"
-              >
-                Work
-              </a>
-
-              <a
-                href="#press"
-                className="text-sm text-slate-400 hover:text-slate-100 transition-colors"
-              >
-                Press
-              </a>
-
-              <a
-                href="#about"
-                className="text-sm text-slate-400 hover:text-slate-100 transition-colors"
-              >
-                About
-              </a>
-
-              <a
-                href="#education"
-                className="text-sm text-slate-400 hover:text-slate-100 transition-colors"
-              >
-                Education
-              </a>
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-muted transition-colors hover:text-ink"
+                >
+                  {link.label}
+                </a>
+              ))}
 
               <a
                 href="/Gaye_Bulut_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-slate-400 hover:text-teal-400 transition-colors"
+                className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent transition-colors hover:text-ink"
                 aria-label="View resume"
               >
-                Resume
+                Resume <span aria-hidden="true">↗</span>
               </a>
+
+              <span className="h-4 w-px bg-line" aria-hidden="true" />
 
               <a
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
+                className="text-ink-muted hover:text-accent focus-visible:text-accent transition-colors"
                 aria-label="LinkedIn profile"
               >
-                <Linkedin className="w-5 h-5" />
+                <Linkedin className="w-4 h-4" />
               </a>
 
               <a
                 href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
+                className="text-ink-muted hover:text-accent focus-visible:text-accent transition-colors"
                 aria-label="GitHub profile"
               >
-                <Github className="w-5 h-5" />
+                <Github className="w-4 h-4" />
               </a>
 
               <button
                 onClick={copyEmailToClipboard}
-                className="relative text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
+                className="relative text-ink-muted hover:text-accent focus-visible:text-accent transition-colors"
                 title={emailCopied ? 'Email copied!' : 'Copy email to clipboard'}
                 aria-label={emailCopied ? 'Email copied!' : 'Copy email to clipboard'}
               >
-                <Mail className="w-5 h-5" />
+                <Mail className="w-4 h-4" />
                 {emailCopied && (
                   <span
                     role="status"
                     aria-live="polite"
-                    className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-teal-400 whitespace-nowrap"
+                    className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.15em] text-accent"
                   >
                     Copied!
                   </span>
@@ -151,7 +143,7 @@ export function Navigation({ isVisible }: NavigationProps) {
           {/* Mobile menu button */}
           {isMobile && (
             <button
-              className="p-2 text-slate-400 hover:text-slate-100 transition-colors"
+              className="p-2 text-ink-muted hover:text-ink transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
               aria-expanded={mobileMenuOpen}
@@ -181,52 +173,34 @@ export function Navigation({ isVisible }: NavigationProps) {
 
         {/* Mobile menu dropdown */}
         {isMobile && mobileMenuOpen && (
-          <div className="border-t border-slate-800">
-            <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto py-4 space-y-4">
-              <a
-                href="#work"
-                className="block text-slate-300 hover:text-teal-400 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Work
-              </a>
-              <a
-                href="#press"
-                className="block text-slate-300 hover:text-teal-400 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Press
-              </a>
-              <a
-                href="#about"
-                className="block text-slate-300 hover:text-teal-400 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                About
-              </a>
-              <a
-                href="#education"
-                className="block text-slate-300 hover:text-teal-400 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Education
-              </a>
+          <div className="border-t border-line">
+            <div className="container-spec space-y-4 py-4">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="block font-mono text-xs uppercase tracking-[0.18em] text-ink-muted transition-colors hover:text-accent"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ))}
               <a
                 href="/Gaye_Bulut_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-slate-300 hover:text-teal-400 transition-colors"
+                className="block font-mono text-xs uppercase tracking-[0.18em] text-accent transition-colors hover:text-ink"
                 onClick={() => setMobileMenuOpen(false)}
                 aria-label="View resume"
               >
-                Resume
+                Resume <span aria-hidden="true">↗</span>
               </a>
               <div className="flex items-center gap-4 pt-2">
                 <a
                   href={personalInfo.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
+                  className="text-ink-muted hover:text-accent focus-visible:text-accent transition-colors"
                   aria-label="LinkedIn profile"
                 >
                   <Linkedin className="w-5 h-5" />
@@ -235,14 +209,14 @@ export function Navigation({ isVisible }: NavigationProps) {
                   href={personalInfo.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
+                  className="text-ink-muted hover:text-accent focus-visible:text-accent transition-colors"
                   aria-label="GitHub profile"
                 >
                   <Github className="w-5 h-5" />
                 </a>
                 <button
                   onClick={copyEmailToClipboard}
-                  className="relative text-slate-400 hover:text-slate-100 focus-visible:text-slate-100 transition-colors"
+                  className="relative text-ink-muted hover:text-accent focus-visible:text-accent transition-colors"
                   title={emailCopied ? 'Email copied!' : 'Copy email to clipboard'}
                   aria-label={emailCopied ? 'Email copied!' : 'Copy email to clipboard'}
                 >
@@ -251,7 +225,7 @@ export function Navigation({ isVisible }: NavigationProps) {
                     <span
                       role="status"
                       aria-live="polite"
-                      className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-teal-400 whitespace-nowrap"
+                      className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.15em] text-accent"
                     >
                       Copied!
                     </span>

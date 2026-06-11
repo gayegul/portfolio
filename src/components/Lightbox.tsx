@@ -64,7 +64,7 @@ export function Lightbox({ image, alt, isOpen, onClose }: LightboxProps) {
       <button
         ref={closeButtonRef}
         onClick={onClose}
-        className="absolute top-4 right-4 text-white hover:text-teal-400 focus-visible:text-teal-400 transition-colors"
+        className="absolute top-4 right-4 text-white hover:text-accent focus-visible:text-accent transition-colors"
         aria-label="Close image viewer"
       >
         <X className="w-8 h-8" />

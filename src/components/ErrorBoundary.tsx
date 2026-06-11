@@ -1,16 +1,25 @@
 import React from 'react';
 
-export class ErrorBoundary extends React.Component {
-  constructor(props) {
+interface ErrorBoundaryProps {
+  children: React.ReactNode;
+}
+
+interface ErrorBoundaryState {
+  hasError: boolean;
+  error: Error | null;
+}
+
+export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false, error: null };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // Log error details
     console.error('ErrorBoundary caught an error:', error, errorInfo);
 
@@ -28,15 +37,15 @@ export class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen flex items-center justify-center px-4 bg-navy-dark">
+        <div className="min-h-screen flex items-center justify-center px-4 bg-ground">
           <div className="max-w-md text-center">
-            <h1 className="text-4xl font-bold text-slate-100 mb-4">Oops!</h1>
-            <p className="text-lg text-slate-400 mb-6">
+            <h1 className="font-display font-bold uppercase text-5xl text-ink mb-4">Fault</h1>
+            <p className="font-sans text-lg text-ink-muted mb-6">
               Something went wrong. Please try refreshing the page.
             </p>
             <button
               onClick={() => window.location.reload()}
-              className="px-6 py-3 bg-teal-500 hover:bg-teal-600 text-slate-950 font-medium rounded-lg transition-colors"
+              className="px-6 py-3 bg-accent hover:bg-ink text-ground font-mono text-sm uppercase tracking-[0.15em] transition-colors"
             >
               Refresh Page
             </button>

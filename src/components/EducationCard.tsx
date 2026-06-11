@@ -1,37 +1,32 @@
-import { ExternalLink } from 'lucide-react';
-import { FadeIn } from './FadeIn';
 import { Education } from '../data/education';
 
 interface EducationCardProps {
   edu: Education;
-  index: number;
 }
 
-export function EducationCard({ edu, index }: EducationCardProps) {
+export function EducationCard({ edu }: EducationCardProps) {
   return (
-    <FadeIn delay={index * 100}>
-      <a
-        href={edu.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="relative p-3 sm:p-4 rounded-lg border border-slate-border bg-slate-card transition-all duration-300 hover:-translate-y-1 hover:border-teal-400/40 group block h-full"
+    <a
+      href={edu.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group grid gap-1 border-t border-line py-4 last:border-b sm:grid-cols-12 sm:items-baseline sm:gap-4"
+    >
+      <span className="font-mono text-xs uppercase tracking-[0.15em] text-accent sm:col-span-3">
+        {edu.degree}{' '}
+        <span title={edu.country} aria-label={edu.country}>
+          {edu.flag}
+        </span>
+      </span>
+
+      <span className="font-sans text-base text-ink sm:col-span-4">{edu.field}</span>
+
+      <span
+        className="font-mono text-xs text-ink-faint transition-colors group-hover:text-accent sm:col-span-5"
+        title={edu.schoolFull}
       >
-        <div className="flex items-center gap-2 mb-1">
-          <span className="text-sm sm:text-base font-semibold text-teal-400">{edu.degree}</span>
-          <span className="text-sm sm:text-base" title={edu.country}>
-            {edu.flag}
-          </span>
-        </div>
-
-        <p className="text-xs sm:text-sm font-medium text-slate-200 mb-1 leading-snug">
-          {edu.field}
-        </p>
-
-        <p className="text-[11px] sm:text-xs text-slate-400 group-hover:text-teal-400 transition-colors flex items-center gap-1">
-          {edu.school}
-          <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-        </p>
-      </a>
-    </FadeIn>
+        {edu.school} <span aria-hidden="true">↗</span>
+      </span>
+    </a>
   );
 }
